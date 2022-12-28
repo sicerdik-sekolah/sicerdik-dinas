@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./LoginHeader.module.css";
-
+import iconSicerdikFix from "../../assets/logo-sicerdik-fix.png"
 function LoginHeader() {
   return (
     <div className={styles.loginHeader}>
-      <h1>SICERDIK</h1>
-      <p>Tanjungpinang</p>
-      <h2>Dinas Pendidikan</h2>
-      <p>Kota Tanjungpinang</p>
+      <img src={iconSicerdikFix} width={"300px"}/>
+      <h2 className="mt-4">Dinas Pendidikan</h2>
+      <p className="mt-2">Kota Tanjungpinang</p>
     </div>
   );
 }

@@ -26,11 +26,14 @@ input[type="number"] {
   align-items: center;
   padding: 5rem;
   width: 40%;
-  height: 120vh;
+  height: 80vh;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
-  background: #1746a2;
+  background: #1745a2d2;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
   border: 1px solid #ffffff;
   border-radius: 20px;
   /* padding: 10px; */
@@ -48,8 +51,8 @@ input[type="number"] {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
-  line-height: 54px;
+  font-size: 16px;
+  /* line-height: 54px; */
   color: white;
 }
 .portal .container-portal .card h3 {
@@ -57,7 +60,7 @@ input[type="number"] {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 14px;
 }
 
 .container-portal .card{
@@ -132,20 +135,21 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   background: #1745a2d2;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10.5px);
   -webkit-backdrop-filter: blur(10.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 5%;
+  padding: 1rem 0;
   width: 70%;
 }
 .login-page .card h1.manajemen {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  font-weight: 300;
+  font-weight: 700;
+  font-size: 16px;
   margin-bottom: 1rem;
 }
 .login-page .card form {
@@ -157,7 +161,7 @@ input[type="number"] {
   gap: 2rem;
 }
 .btnSection {
-  margin-top: 2rem;
+  margin-top: 0rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -176,8 +180,8 @@ input[type="number"] {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 200;
-  font-size: 20px;
-  line-height: 39px;
+  font-size: 16px;
+  /* line-height: 39px; */
   color: white;
   padding: 0;
   margin: 0;
@@ -187,7 +191,7 @@ input[type="number"] {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 39px;
   color: white;
 }

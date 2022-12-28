@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/reducers/loginSlice";
 import Cookies from "js-cookie";
-
+import iconSicerdikFix from "../../assets/logo-sicerdik-fix.png"
 import { authorizationCheck } from "../../utils/authRole";
 function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -37,8 +37,9 @@ function NavBar() {
         </div>
 
         <div className={styles.title} onClick={() => navigate("/home")}>
-          <h1>SICERDIK</h1>
-          <p>Tanjungpinang</p>
+          {/* <h1>SICERDIK</h1>
+          <p>Tanjungpinang</p> */}
+          <img src={iconSicerdikFix} width={"200px"} />
         </div>
         <div className={styles.user}>
           <p>{user}</p>

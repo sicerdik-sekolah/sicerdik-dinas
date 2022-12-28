@@ -20,11 +20,11 @@
 }
 .loginHeader h2 {
   font-weight: 700;
-  font-size: 36px;
-  line-height: 54px;
+  font-size: 20px;
+  /* line-height: 54px; */
 }
 .loginHeader p {
   font-weight: 300;
-  font-size: 28px;
-  line-height: 42px;
+  font-size: 16px;
+  /* line-height: 42px; */
 }
