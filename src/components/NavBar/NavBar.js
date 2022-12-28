@@ -25,6 +25,9 @@ function NavBar() {
     dispatch(logout());
     Cookies.remove("token");
     localStorage.setItem("jabatan", "");
+    localStorage.setItem("nip", "");
+    localStorage.setItem("nama", "");
+    // localStorage.setItem("jabatan", "");
   };
   return (
     <header>

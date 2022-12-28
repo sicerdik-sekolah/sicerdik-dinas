@@ -15,7 +15,7 @@ function Login() {
     email: "",
     password: "",
   });
-  const [user, setUser] = useState(authorizationCheck());
+  // const [user, setUser] = useState(authorizationCheck());
 
   const navigation = useNavigate();
 

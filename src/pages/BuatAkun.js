@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 function BuatAkun() {
   const navigation = useNavigate();
-  const [jenisAkun, setJenisAkun] = useState("DISDIK");
+  const [jenisAkun, setJenisAkun] = useState("disdik");
   const token = Cookies.get("token");
   const [form, setForm] = useState({
     email: "",
@@ -22,6 +22,7 @@ function BuatAkun() {
     nip: "",
     tempat: "",
     role: "",
+    nama : ""
   });
   const [jabatan, setJabatan] = useState("sekretaris");
   const handleChangeJenisAkun = (e) => {
@@ -34,31 +35,66 @@ function BuatAkun() {
     setJabatan(e.target.value);
   };
   const makeAccount = async () => {
-    try {
-      const { email, password, nik, nip, tempat } = form;
-      const payload = {
-        email,
-        password,
-        confirmPassword: password,
-        nik,
-        nip,
-        tempat,
-        role: jabatan,
-      };
-      const data = axios.post(`${apiPath}/cms/akun`, payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log(data);
-    } catch (error) {
-      console.log(error);
+    if(jenisAkun === "disdik"){
+      try {
+        const { email, password, nik, nip, tempat,nama } = form;
+        const payload = {
+          email,
+          nama,
+          password,
+          confirmPassword: password,
+          nik,
+          nip,
+          tempat: tempat.toUpperCase(),
+          role: jabatan,
+        };
+        console.log("payload signup >> ", payload);
+        const data = await axios.post(`${apiPath}/cms/akun`, payload, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }else if(jenisAkun === "sekolah"){
+      try {
+        const { email, password, nik, nip, tempat,nama } = form;
+        const payload = {
+          email,
+          nama,
+          password,
+          confirmPassword: password,
+          nik,
+          nip,
+          tempat: tempat.toUpperCase(),
+          role: jabatan,
+        };
+        console.log("payload signup >> ", payload);
+        const data = await axios.post(`${apiPath}/cms/akun`, payload, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleCreateAkun = (e) => {
-    const { email, password, nik, nip, tempat } = form;
-    if (email && password && nik && nip && tempat && jabatan) {
+    const { email, password, nik, nip, tempat, nama } = form;
+    if(password.length < 8){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password harus lebih dari 8 karakter",
+      });
+    }
+    else if (email && password && nik && nip && tempat && jabatan && password.length >= 8) {
       e.preventDefault();
       Swal.fire({
         title: "Buatkan Akun ?",
@@ -72,7 +108,8 @@ function BuatAkun() {
           console.log("role >>> ", jabatan);
           makeAccount();
           Swal.fire("Akun Berhasil Dibuat!", "", "success");
-          navigation("/manajemen-akun/users");
+          // navigation("/manajemen-akun/users");
+          // window.location.reload();
         }
       });
     } else {
@@ -88,6 +125,8 @@ function BuatAkun() {
       navigation("/login");
     }
   }, []);
+
+  
   return (
     <>
       <NavBarManajemenAkun />
@@ -100,12 +139,21 @@ function BuatAkun() {
           <div className="container table-container panel panel-default">
             <div className="mx-5 d-flex flex-column gap-3 ">
               <div className="d-flex flex-column gap-2">
-                <label className="label-select-akun">Tujuan Akun : </label>
+                <label className="label-select-akun">Jenis Akun : </label>
                 <Form.Select onChange={handleChangeJenisAkun}>
-                  <option value={"DISDIK"}>DISDIK </option>
-                  <option value={"SEKOLAH"}>SEKOLAH</option>
+                  <option value={"disdik"}>DISDIK </option>
+                  <option value={"sekolah"}>SEKOLAH</option>
                 </Form.Select>
               </div>
+              <InputFormWithLabel
+                label={"Nama"}
+                type={"text"}
+                name={"nama"}
+                placeholder={"Raden Syaga"}
+                onChange={handleChangeForm}
+                value={form.nama}
+                isRequired
+              />
               <InputFormWithLabel
                 label={"Email"}
                 type={"email"}
@@ -143,18 +191,26 @@ function BuatAkun() {
                 isRequired
               />
               <InputFormWithLabel
-                label={"Tempat Bekerja"}
+                label={`${
+                  jenisAkun === "disdik"
+                    ? "Input Tempat Dinas"
+                    : "Input Nama Sekolah"
+                }`}
                 type={"text"}
                 name={"tempat"}
                 onChange={handleChangeForm}
                 value={form.tempat}
-                placeholder={"Masukkan Tempat Bekerja Anda"}
+                placeholder={`${
+                  jenisAkun === "disdik"
+                    ? "Contoh : DINAS PENDIDIKAN TPI"
+                    : "Contoh : SD NEGERI 014 BINAAN BUKIT BESTARI"
+                }`}
                 isRequired
               />
               <div className="d-flex flex-column gap-3">
                 <label className="label-select-akun">Jabatan Akun : </label>
                 <Form.Select onChange={handleChangeJabatan}>
-                  {jenisAkun === "DISDIK" ? (
+                  {jenisAkun === "disdik" ? (
                     <>
                       <option value={"sekretaris"}>Sekretaris Disdik</option>
                       <option value={"kasubag"}>Kasubag DISDIK</option>
@@ -162,8 +218,8 @@ function BuatAkun() {
                     </>
                   ) : (
                     <>
-                      <option value={"Kepala Sekolah"}>Kepala Sekolah</option>
-                      <option value={"Staff Sekolah"}>Staff Sekolah</option>
+                      <option value={"kepala_sekolah"}>Kepala Sekolah</option>
+                      <option value={"staff_sekolah"}>Staff Sekolah</option>
                     </>
                   )}
                 </Form.Select>

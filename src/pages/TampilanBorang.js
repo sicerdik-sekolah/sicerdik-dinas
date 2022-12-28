@@ -54,10 +54,12 @@ function TampilanBorang(props) {
   const tanggaldisposisi = datedisposisi.getDate();
   const bulandisposisi = dapatkanBulan(datedisposisi.getMonth() + 1);
   const tahundisposisi = datedisposisi.getFullYear();
+  const yang_menandatangani = searchParams.get("yang_menandatangani").toUpperCase()
+  const namaPenandatangan = searchParams.get("nama_yang_menandatangani").toUpperCase()
 
   const [jenisSurat, setJenisSurat] = useState(searchParams.get("jenis_surat"))
 
-
+  console.log(jenisSurat)
   const jsonData = {
     nama_siswa: searchParams.get("nama_siswa"),
     nomor_laporan: searchParams.get("nomor_laporan"),
@@ -73,7 +75,8 @@ function TampilanBorang(props) {
     pekerjaan_ortu: searchParams.get("pekerjaan_ortu"),
     jenis_kelamin: searchParams.get("jenis_kelamin"),
     tempat_tanggal_lahir: searchParams.get("tempat_tanggal_lahir"),
-    yang_menandatangani: searchParams.get("yang_menandatangani"),
+    yang_menandatangani: yang_menandatangani,
+    nama_yang_menandatangani : namaPenandatangan,
     nip: searchParams.get("nip"),
     tanggal_naskah_masuk: `${tanggalMasuk} ${bulanMasuk} ${tahunMasuk}`,
     tanggal_disposisi: `${tanggaldisposisi} ${bulandisposisi} ${tahundisposisi}`,

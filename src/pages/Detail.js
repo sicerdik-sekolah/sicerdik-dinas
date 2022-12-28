@@ -26,7 +26,7 @@ function Detail() {
   const { id } = useParams();
   const navigation = useNavigate();
   const [penandaTangan, setPenandatangan] = useState("kasubag");
-  const [jenisSurat, setJenisSurat] = useState("Surat Pindah Sekolah");
+  const [jenisSurat, setJenisSurat] = useState("REKOMENDASI_PINDAH_SEKOLAH_KELUAR");
   const [kembalikanSuratVerfikasi, setKembalikanSuratVerifikasi] =
     useState(false);
   const [kembalikanSuratTTD, setKembalikanSuratTTD] = useState(false);
@@ -51,8 +51,8 @@ function Detail() {
     console.log("nomor naskah >> ", nomorNaskah);
   };
   const onChangeTanggalDisposisi = (e) => {
+    console.log("tanggal_disposisi", e.target.value);
     setTanggalDisposisi(e.target.value);
-    console.log("tanggal_disposisi", tanggalDisposisi);
   };
   const handleMarkAsVerified = (id) => {
     console.log("role >>> ", roleSementara);
@@ -117,7 +117,7 @@ function Detail() {
           if (result.isConfirmed) {
             dispatch(changeStatusTTD(id));
             Swal.fire("Berhasil di Tanda tangan!", "", "success");
-            navigation("/home");
+            // navigation("/home");
           } else if (result.isDenied) {
             Swal.fire("Tidak ada perubahan", "", "info");
           }
@@ -184,8 +184,8 @@ function Detail() {
             denyButtonText: `Batalkan`,
           }).then((result) => {
             if (result.isConfirmed) {
-              dispatch(sendFileDisdik({ id: id, data: fileDisdik }));
               dispatch(changeStatusKirim(id));
+              dispatch(sendFileDisdik({ id: id, data: fileDisdik }));
               Swal.fire("Terkirim!", "", "success");
               navigation("/home");
             }
@@ -329,10 +329,30 @@ function Detail() {
                   label={"Surat Keterangan Pindah Sekolah"}
                   pdfFile={targetData.surat_pindah}
                 />
-                <ViewSuratCard
-                  label={"Surat Keterangan PLH Kepala Sekolah"}
-                  pdfFile={`${targetData.surat_plh && targetData.surat_plh}`}
-                />
+                {targetData.surat_lain_lain && (
+                  <ViewSuratCard
+                    label={"Surat Lain-Lain"}
+                    pdfFile={`${
+                      targetData.surat_lain_lain && targetData.surat_lain_lain
+                    }`}
+                  />
+                )}
+                {targetData.surat_keterangan_lulus && (
+                  <ViewSuratCard
+                    label={"Surat Keterangan Lulus"}
+                    pdfFile={`${
+                      targetData.surat_keterangan_lulus && targetData.surat_keterangan_lulus
+                    }`}
+                  />
+                )}
+                {targetData.surat_dinas_pendidikan_setempat && (
+                  <ViewSuratCard
+                    label={"Surat Dinas Pendidikan Setempat"}
+                    pdfFile={`${
+                      targetData.surat_dinas_pendidikan_setempat && targetData.surat_dinas_pendidikan_setempat
+                    }`}
+                  />
+                )}
                 {targetData.status_verifikasi === false ? (
                   <>
                     <div className="ps-2">
@@ -447,11 +467,12 @@ function Detail() {
                       tanggal_disposisi: targetData.tanggal_naskah_disposisi,
                       nisn_siswa: targetData.nisn_siswa,
                       nis_siswa: targetData.nis,
-                      kelas: targetData.kelas,
+                      kelas: targetData.tingkatDanKelas,
                       nama_ortu: targetData.nama_orang_tua,
                       jenis_kelamin: targetData.jenis_kelamin,
                       yang_menandatangani: targetData.yang_menandatangani,
-                      nip: "20192991",
+                      nip: localStorage.getItem("nip"),
+                      nama_yang_menandatangani : localStorage.getItem("nama"),
                       tempat_tanggal_lahir: targetData.tempat_tgl_lahir,
                       pekerjaan_ortu: targetData.pekerjaan_orang_tua,
                       alasan_pindah: targetData.alasan_pindah,

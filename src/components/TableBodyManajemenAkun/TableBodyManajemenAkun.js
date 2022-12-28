@@ -10,25 +10,26 @@ function TableBodyManajemenAkun(props) {
           return (
             <tr key={idx} className="text-center align-middle">
               <td>{idx + 1}</td>
-              <td>{item.id}</td>
+              <td>{item._id}</td>
+              <td>{item.nama}</td>
               <td>{item.email}</td>
               <td>{item.nip}</td>
-              <td>{item.asal_sekolah}</td>
+              <td>{item.tempat}</td>
               <td>
                 <span
-                  className="button-status px-2 py-1"
+                  className="button-status px-3 py-1"
                   style={{
                     backgroundColor: `${
-                      item.status_akun === "non aktif" ? "#EDE300" : "#00BDAA"
+                      item.statusAkun === false ? "#EDE300" : "#00BDAA"
                     }`,
                   }}
                 >
-                  {item.status_akun}
+                  {item.statusAkun ? "Aktif" : "Mati"}
                 </span>
               </td>
               <td>
                 <div className=" d-flex justify-content-center align-items-center">
-                  <Link to={`/manajemen-akun/users/ganti-status/${item.id}`}>
+                  <Link to={`/manajemen-akun/users/ganti-status/${item._id}`}>
                     <span className="action-btn ">
                       <img src={IconAksi} alt="icon" />
                     </span>
@@ -37,7 +38,7 @@ function TableBodyManajemenAkun(props) {
               </td>
               <td>
                 <div className=" d-flex justify-content-center align-items-center">
-                  <Link to={`/manajemen-akun/users/reset-password/${item.id}`}>
+                  <Link to={`/manajemen-akun/users/reset-password/${item._id}`}>
                     <span className="action-btn ">
                       <img src={IconReset} alt="icon" />
                     </span>

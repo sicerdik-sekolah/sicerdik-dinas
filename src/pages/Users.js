@@ -7,7 +7,11 @@ import TableUsers from "../components/TableUsers/TableUsers";
 import ButtonFormView from "../components/ButtonFormView/ButtonFormView";
 function Home() {
   const navigation = useNavigate();
-
+  useEffect(() => {
+    if(!Cookies.get("token")){
+      navigation("/manajemen-akun")
+    }
+  }, [Cookies.get("token")])
   return (
     <>
       <NavBarManajemenAkun />

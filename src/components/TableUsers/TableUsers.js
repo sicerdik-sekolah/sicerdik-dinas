@@ -1,19 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Table from "react-bootstrap/Table";
 import TableBodyManajemenAkun from "../TableBodyManajemenAkun/TableBodyManajemenAkun";
 import TableHeader from "../TableHeader/TableHeader";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {fetchAllUsers} from "../../store/reducers/dummyDataManajemenAkunSlice"
 function TableUsers() {
   const tableHeader = [
-    "ID_USER",
+    "ID",
+    "Nama",
     "Email",
     "NIP",
-    "Asal Sekolah",
+    "Tempat Bekerja",
     "Status Akun",
     "Ganti Status Akun",
     "Reset Password",
   ];
+  const dispatch = useDispatch()
   const { data } = useSelector((state) => state.dummyDataManajemenAkun);
+  useEffect(() => {
+    dispatch(fetchAllUsers())
+  },[])
   return (
     <Table responsive striped bordered>
       <TableHeader dataRow={tableHeader} />

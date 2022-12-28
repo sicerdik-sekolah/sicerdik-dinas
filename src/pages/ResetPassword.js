@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import FormCard from "../components/FormCard/FormCard";
 import { useSelector, useDispatch } from "react-redux";
-
+import { resetPassword } from "../store/reducers/dummyDataManajemenAkunSlice";
 import NavBarManajemenAkun from "../components/NavBarManajemenAkun/NavBarManajemenAkun";
 import ButtonFormView from "../components/ButtonFormView/ButtonFormView";
 
@@ -12,11 +12,21 @@ function ResetPassword(props) {
   const navigation = useNavigate();
   const { id } = useParams();
   const { data } = useSelector((state) => state.dummyDataManajemenAkun);
-  const targetData = data.find((item) => item.id == id);
+  const targetData = data.find((item) => item._id === id);
   const [password, setPassword] = useState("");
   const handleChange = (e) => {
     setPassword(e.target.value);
   };
+  const dispatch = useDispatch();
+  const handleResetPassword = (e) => {
+    e.preventDefault()
+    const payload = {
+      id: id,
+      password: password,
+    };
+    dispatch(resetPassword(payload));
+  };
+
   return (
     <>
       <NavBarManajemenAkun />
@@ -29,7 +39,10 @@ function ResetPassword(props) {
             </h3>
           </div>
           <div className="mx-5 mt-3 mb-4">
-            <form className="verifikasiPenandatangan">
+            <form
+              className="verifikasiPenandatangan"
+              onSubmit={handleResetPassword}
+            >
               <h3 className="text-center">Reset Password</h3>
               <InputFormWithLabel
                 label={"Password Baru Anda "}
@@ -42,7 +55,7 @@ function ResetPassword(props) {
               <div className="d-flex justify-content-center align-items-center gap-4 mt-4">
                 <ButtonFormView
                   isprimary
-                  //   onClick={() => alert("gantii")}
+                  // onClick={() => alert("gantii")}
                   type={"submit"}
                 >
                   Reset Password
