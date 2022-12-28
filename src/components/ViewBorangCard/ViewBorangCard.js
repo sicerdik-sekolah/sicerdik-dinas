@@ -14,8 +14,8 @@ function ViewBorangCard(props) {
   };
 
   useEffect(() => {
-    console.log("props.file >>> ", props.file);
-    console.log("props.data >>> ", props.data);
+    // console.log("props.file >>> ", props.file);
+    // console.log("props.data >>> ", props.data);
     WebViewer(
       { path: "lib", initialDoc: `/files/${props.file}` },
       viewer.current
@@ -54,7 +54,7 @@ function ViewBorangCard(props) {
         documentViewer.updateView();
         await documentViewer.getDocument().applyTemplateValues(props.data);
       });
-      console.log("selesai");
+      // console.log("selesai");
     });
   }, []);
   return (

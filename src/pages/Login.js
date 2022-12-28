@@ -34,7 +34,7 @@ function Login() {
   const handleClick = (e) => {
     e.preventDefault();
     if (form.email || form.password) {
-      console.log("form >>> ", form);
+      // console.log("form >>> ", form);
       dispatch(fakeLogin(form));
     } else {
       Swal.fire({
@@ -43,7 +43,7 @@ function Login() {
         text: "Mohon isi semua form",
       });
     }
-    console.log(formState);
+    // console.log(formState);
   };
 
   useEffect(() => {

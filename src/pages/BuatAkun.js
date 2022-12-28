@@ -22,7 +22,7 @@ function BuatAkun() {
     nip: "",
     tempat: "",
     role: "",
-    nama : ""
+    nama: "",
   });
   const [jabatan, setJabatan] = useState("");
   const handleChangeJenisAkun = (e) => {
@@ -32,13 +32,13 @@ function BuatAkun() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleChangeJabatan = (e) => {
-    console.log("JABATAN >>> ", e.target.value);
+    // console.log("JABATAN >>> ", e.target.value);
     setJabatan(e.target.value);
   };
   const makeAccount = async () => {
-    if(jenisAkun === "disdik"){
+    if (jenisAkun === "disdik") {
       try {
-        const { email, password, nik, nip, tempat,nama } = form;
+        const { email, password, nik, nip, tempat, nama } = form;
         const payload = {
           email,
           nama,
@@ -49,20 +49,20 @@ function BuatAkun() {
           tempat: tempat.toUpperCase(),
           role: jabatan,
         };
-        console.log("payload signup >> ", payload);
+        // console.log("payload signup >> ", payload);
         const data = await axios.post(`${apiPath}/cms/akun`, payload, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
-        console.log(data);
+
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
-    }else if(jenisAkun === "sekolah"){
+    } else if (jenisAkun === "sekolah") {
       try {
-        const { email, password, nik, nip, tempat,nama } = form;
+        const { email, password, nik, nip, tempat, nama } = form;
         const payload = {
           email,
           nama,
@@ -73,14 +73,14 @@ function BuatAkun() {
           tempat: tempat.toUpperCase(),
           role: jabatan,
         };
-        console.log("payload signup >> ", payload);
+        // console.log("payload signup >> ", payload);
         const data = await axios.post(`${apiPath}/cms/akun`, payload, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
-        console.log(data);
+
+        // console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -88,14 +88,21 @@ function BuatAkun() {
   };
   const handleCreateAkun = (e) => {
     const { email, password, nik, nip, tempat, nama } = form;
-    if(password.length < 8){
+    if (password.length < 8) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Password harus lebih dari 8 karakter",
       });
-    }
-    else if (email && password && nik && nip && tempat && jabatan && password.length >= 8) {
+    } else if (
+      email &&
+      password &&
+      nik &&
+      nip &&
+      tempat &&
+      jabatan &&
+      password.length >= 8
+    ) {
       e.preventDefault();
       Swal.fire({
         title: "Buatkan Akun ?",
@@ -105,8 +112,8 @@ function BuatAkun() {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          console.log("form >>> ", form);
-          console.log("role >>> ", jabatan);
+          // console.log("form >>> ", form);
+          // console.log("role >>> ", jabatan);
           makeAccount();
           Swal.fire("Akun Berhasil Dibuat!", "", "success");
           // navigation("/manajemen-akun/users");
@@ -127,7 +134,6 @@ function BuatAkun() {
     }
   }, []);
 
-  
   return (
     <>
       <NavBarManajemenAkun />

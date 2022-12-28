@@ -56,20 +56,20 @@ function Home() {
         })
         .map((item) => item)
     : [];
-  
-    useEffect(() => {
-      if(!Cookies.get("token")){
-        navigation('/login')
-      }
-    }, [Cookies.get("token")])
+
+  useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigation("/login");
+    }
+  }, [Cookies.get("token")]);
 
   useEffect(() => {
     dispatch(fetchNaskah());
     setInterval(() => {
-      console.log("token", Cookies.get("token"))
-      if(!Cookies.get("token")){
-        navigation('/login')
-      }else{
+      // console.log("token", Cookies.get("token"))
+      if (!Cookies.get("token")) {
+        navigation("/login");
+      } else {
         dispatch(fetchNaskah());
       }
     }, 45000);

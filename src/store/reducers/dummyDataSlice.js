@@ -23,7 +23,7 @@ export const fetchNaskah = createAsyncThunk(
       const filterYangSudah = resp.data.data.filter(
         (item) => item.status_ttd_kepsek === true
       );
-      console.log("respon laporan fetching >> ", filterYangSudah);
+      // console.log("respon laporan fetching >> ", filterYangSudah);
       return filterYangSudah;
     } catch (error) {
       console.log(error);
@@ -64,7 +64,7 @@ export const changeStatusKirim = createAsyncThunk(
           Authorization: "Bearer " + token,
         },
       });
-      console.log("res >> ", res);
+      // console.log("res >> ", res);
       return res;
     } catch (error) {
       console.log(error);
@@ -87,7 +87,7 @@ export const updateNaskahVerifikasi = createAsyncThunk(
         },
         data: payload,
       });
-      console.log("res >> ", res);
+      // console.log("res >> ", res);
       return res;
     } catch (error) {
       console.log(error);
@@ -100,7 +100,7 @@ export const changeStatusTTD = createAsyncThunk(
   async (id) => {
     try {
       const token = Cookies.get("token");
-      console.log("token >>> ", token);
+      // console.log("token >>> ", token);
       const res = await axios({
         method: "put",
         url: `${apiPath}/cms/laporan/ubah-status-ttd/${id}`,
@@ -108,7 +108,7 @@ export const changeStatusTTD = createAsyncThunk(
           Authorization: "Bearer " + token,
         },
       });
-      console.log("res >> ", res);
+      // console.log("res >> ", res);
       return res;
     } catch (error) {
       console.log(error);
@@ -121,8 +121,8 @@ export const sendFileDisdik = createAsyncThunk(
   async (payload) => {
     let filename = payload.data;
 
-    console.log("payload send file disdik >> ", payload);
-    console.log("filename send file disdik >> ", filename);
+    // console.log("payload send file disdik >> ", payload);
+    // console.log("filename send file disdik >> ", filename);
     const token = Cookies.get("token");
     let formData = new FormData();
     formData.append("surat_disdik", filename);
@@ -138,7 +138,7 @@ export const sendFileDisdik = createAsyncThunk(
       }
     );
 
-    console.log("res >> ", res);
+    // console.log("res >> ", res);
     return res;
   }
 );

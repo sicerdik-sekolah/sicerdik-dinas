@@ -26,7 +26,9 @@ function Detail() {
   const { id } = useParams();
   const navigation = useNavigate();
   const [penandaTangan, setPenandatangan] = useState("kasubag");
-  const [jenisSurat, setJenisSurat] = useState("REKOMENDASI_PINDAH_SEKOLAH_KELUAR");
+  const [jenisSurat, setJenisSurat] = useState(
+    "REKOMENDASI_PINDAH_SEKOLAH_KELUAR"
+  );
   const [kembalikanSuratVerfikasi, setKembalikanSuratVerifikasi] =
     useState(false);
   const [kembalikanSuratTTD, setKembalikanSuratTTD] = useState(false);
@@ -43,19 +45,19 @@ function Detail() {
   );
   // const { form } = useSelector((state) => state.login);
   const targetData = allData.find((item) => item._id == id);
-  console.log("target data >> ", targetData);
+  // console.log("target data >> ", targetData);
   // const roleSementara = "Ketua Sub Bagian";
   const [roleSementara, setRoleSementara] = useState(authorizationCheck());
   const onChangeNomorNaskah = (e) => {
     setNomorNaskah(e.target.value);
-    console.log("nomor naskah >> ", nomorNaskah);
+    // console.log("nomor naskah >> ", nomorNaskah);
   };
   const onChangeTanggalDisposisi = (e) => {
-    console.log("tanggal_disposisi", e.target.value);
+    // console.log("tanggal_disposisi", e.target.value);
     setTanggalDisposisi(e.target.value);
   };
   const handleMarkAsVerified = (id) => {
-    console.log("role >>> ", roleSementara);
+    // console.log("role >>> ", roleSementara);
     if (/*form.role*/ roleSementara === "staff") {
       Swal.fire({
         title: "Verifikasi Naskah?",
@@ -99,8 +101,8 @@ function Detail() {
   };
 
   const handleMarkAsTTD = (id) => {
-    console.log("role >>> ", roleSementara);
-    console.log("file >> ", fileDisdik);
+    // console.log("role >>> ", roleSementara);
+    // console.log("file >> ", fileDisdik);
     if (
       /*form.role*/ roleSementara === "kasubag" ||
       /*form.role*/ roleSementara === "sekretaris"
@@ -275,7 +277,7 @@ function Detail() {
 
   const handleChangeFileDisdik = (e) => {
     setFileDisdik(e.target.files[0]);
-    console.log("file >> ", fileDisdik);
+    // console.log("file >> ", fileDisdik);
   };
 
   useEffect(() => {
@@ -341,7 +343,8 @@ function Detail() {
                   <ViewSuratCard
                     label={"Surat Keterangan Lulus"}
                     pdfFile={`${
-                      targetData.surat_keterangan_lulus && targetData.surat_keterangan_lulus
+                      targetData.surat_keterangan_lulus &&
+                      targetData.surat_keterangan_lulus
                     }`}
                   />
                 )}
@@ -349,7 +352,8 @@ function Detail() {
                   <ViewSuratCard
                     label={"Surat Dinas Pendidikan Setempat"}
                     pdfFile={`${
-                      targetData.surat_dinas_pendidikan_setempat && targetData.surat_dinas_pendidikan_setempat
+                      targetData.surat_dinas_pendidikan_setempat &&
+                      targetData.surat_dinas_pendidikan_setempat
                     }`}
                   />
                 )}
@@ -472,7 +476,7 @@ function Detail() {
                       jenis_kelamin: targetData.jenis_kelamin,
                       yang_menandatangani: targetData.yang_menandatangani,
                       nip: localStorage.getItem("nip"),
-                      nama_yang_menandatangani : localStorage.getItem("nama"),
+                      nama_yang_menandatangani: localStorage.getItem("nama"),
                       tempat_tanggal_lahir: targetData.tempat_tgl_lahir,
                       pekerjaan_ortu: targetData.pekerjaan_orang_tua,
                       alasan_pindah: targetData.alasan_pindah,
