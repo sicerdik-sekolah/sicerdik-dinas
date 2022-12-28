@@ -24,7 +24,7 @@ function BuatAkun() {
     role: "",
     nama : ""
   });
-  const [jabatan, setJabatan] = useState("sekretaris");
+  const [jabatan, setJabatan] = useState("");
   const handleChangeJenisAkun = (e) => {
     setJenisAkun(e.target.value);
   };
@@ -32,6 +32,7 @@ function BuatAkun() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleChangeJabatan = (e) => {
+    console.log("JABATAN >>> ", e.target.value);
     setJabatan(e.target.value);
   };
   const makeAccount = async () => {

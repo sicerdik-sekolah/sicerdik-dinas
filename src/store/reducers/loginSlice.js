@@ -39,10 +39,19 @@ export const fakeLogin = createAsyncThunk(
     try {
       const data = await loginAPI(email, password);
       console.log("data dari login ", data.data.data.statusAkun);
-      if(data.data.data.statusAkun === true){
-        return data.data;
-      }else{
-        throw "akun mati"
+      if (data.data.data.statusAkun === true) {
+        if (
+          data.data.data.role === "kasubag" ||
+          data.data.data.role === "staff" ||
+          data.data.data.role === "sekretaris"
+        ) {
+          return data.data;
+        }
+        else{
+          throw "akun tidak terotorisasi"
+        }
+      } else {
+        throw "akun mati";
       }
     } catch (error) {
       throw error;
@@ -58,8 +67,8 @@ export const loginAdmin = createAsyncThunk(
       console.log(data);
       if (data.data.data.role === "superadmin") {
         return data.data;
-      }else{
-        throw "unauthorized"
+      } else {
+        throw "unauthorized";
       }
     } catch (error) {
       throw error;
@@ -86,7 +95,7 @@ export const loginSlice = createSlice({
         state.isSuccess = initialState.isSuccess;
       })
       .addCase(fakeLogin.fulfilled, (state, action) => {
-        console.log("data2 dari login payload >> ", action.payload.data)
+        console.log("data2 dari login payload >> ", action.payload.data);
         const { token, email, role, nip, nama } = action.payload.data;
         if (role === "superadmin") {
           state.errorMessage = "Email atau Password Salah";
@@ -105,8 +114,8 @@ export const loginSlice = createSlice({
             key
           ).toString();
           localStorage.setItem("jabatan", cipherRole);
-          localStorage.setItem("nip", nip)
-          localStorage.setItem("nama", nama)
+          localStorage.setItem("nip", nip);
+          localStorage.setItem("nama", nama);
           // state.form.keyphrase = keyphrase;
           state.errorMessage = initialState.errorMessage;
         }

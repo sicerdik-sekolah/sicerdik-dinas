@@ -20,8 +20,11 @@ export const fetchNaskah = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log("respon laporan fetching >> ", resp);
-      return resp.data.data;
+      const filterYangSudah = resp.data.data.filter(
+        (item) => item.status_ttd_kepsek === true
+      );
+      console.log("respon laporan fetching >> ", filterYangSudah);
+      return filterYangSudah;
     } catch (error) {
       console.log(error);
     }
@@ -116,23 +119,27 @@ export const changeStatusTTD = createAsyncThunk(
 export const sendFileDisdik = createAsyncThunk(
   "/dummyDataSlice/sendFileDisdik",
   async (payload) => {
-    let filename = payload.data
+    let filename = payload.data;
 
-    console.log("payload send file disdik >> ", payload)
-    console.log("filename send file disdik >> ", filename)
-    const token = Cookies.get("token")
+    console.log("payload send file disdik >> ", payload);
+    console.log("filename send file disdik >> ", filename);
+    const token = Cookies.get("token");
     let formData = new FormData();
-    formData.append('surat_disdik', filename)
+    formData.append("surat_disdik", filename);
 
-    const res = await axios.put(`${apiPath}/cms/laporan/kirim-laporan/${payload.id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': formData ? 'multipart/form-data' : 'application/json',
-      },
-    })
+    const res = await axios.put(
+      `${apiPath}/cms/laporan/kirim-laporan/${payload.id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": formData ? "multipart/form-data" : "application/json",
+        },
+      }
+    );
 
     console.log("res >> ", res);
-    return res
+    return res;
   }
 );
 

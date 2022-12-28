@@ -15,7 +15,7 @@ export const fetchAllUsers = createAsyncThunk(
     try {
       const token = Cookies.get("token");
 
-      const res = await axios.get(`${apiPath}/cms/akun/all-akun`, {
+      const res = await axios.get(`${apiPath}/cms/akun/all-akun-dinas-dan-sekolah`, {
         headers: { Authorization: "Bearer " + token },
       });
       console.log("RES >>", res.data.data);
