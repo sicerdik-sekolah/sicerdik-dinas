@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/reducers/loginSlice";
 import Cookies from "js-cookie";
-import iconSicerdikFix from "../../assets/logo-sicerdik-fix.png"
+import iconSicerdikFix from "../../assets/logo-sicerdik-fix.png";
 import { authorizationCheck } from "../../utils/authRole";
 function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +16,7 @@ function NavBar() {
     authorizationCheck() == "kasubag"
       ? "Kepala Sub Bagian"
       : authorizationCheck() == "staff"
-      ? "Staff"
+      ? "Pengelola Surat"
       : "Sekretaris DISDIK"
   );
   const dispatch = useDispatch();

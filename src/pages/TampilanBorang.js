@@ -44,7 +44,7 @@ function TampilanBorang(props) {
   const viewer = useRef(null);
   const navigation = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
   const dateMasuk = new Date(searchParams.get("tanggal_naskah_masuk"));
   const tanggalMasuk = dateMasuk.getDate();
   const bulanMasuk = dapatkanBulan(dateMasuk.getMonth() + 1);
@@ -54,12 +54,16 @@ function TampilanBorang(props) {
   const tanggaldisposisi = datedisposisi.getDate();
   const bulandisposisi = dapatkanBulan(datedisposisi.getMonth() + 1);
   const tahundisposisi = datedisposisi.getFullYear();
-  const yang_menandatangani = searchParams.get("yang_menandatangani").toUpperCase()
-  const namaPenandatangan = searchParams.get("nama_yang_menandatangani").toUpperCase()
+  const yang_menandatangani = searchParams
+    .get("yang_menandatangani")
+    .toUpperCase();
+  const namaPenandatangan = searchParams
+    .get("nama_yang_menandatangani")
+    .toUpperCase();
 
-  const [jenisSurat, setJenisSurat] = useState(searchParams.get("jenis_surat"))
+  const [jenisSurat, setJenisSurat] = useState(searchParams.get("jenis_surat"));
 
-  console.log(jenisSurat)
+  console.log(jenisSurat);
   const jsonData = {
     nama_siswa: searchParams.get("nama_siswa"),
     nomor_laporan: searchParams.get("nomor_laporan"),
@@ -76,7 +80,7 @@ function TampilanBorang(props) {
     jenis_kelamin: searchParams.get("jenis_kelamin"),
     tempat_tanggal_lahir: searchParams.get("tempat_tanggal_lahir"),
     yang_menandatangani: yang_menandatangani,
-    nama_yang_menandatangani : namaPenandatangan,
+    nama_yang_menandatangani: namaPenandatangan,
     nip: searchParams.get("nip"),
     tanggal_naskah_masuk: `${tanggalMasuk} ${bulanMasuk} ${tahunMasuk}`,
     tanggal_disposisi: `${tanggaldisposisi} ${bulandisposisi} ${tahundisposisi}`,
@@ -150,7 +154,7 @@ function TampilanBorang(props) {
                 height={"50px"}
               />
             </div>
-            <h4 className="text-center">Tampilan Borang</h4>
+            <h4 className="text-center">Tampilan Surat</h4>
           </div>
           <div
             className="webviewer"

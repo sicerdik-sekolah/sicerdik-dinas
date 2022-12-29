@@ -26,7 +26,9 @@ function Detail() {
   const { id } = useParams();
   const navigation = useNavigate();
   const [penandaTangan, setPenandatangan] = useState("kasubag");
-  const [jenisSurat, setJenisSurat] = useState("REKOMENDASI_PINDAH_SEKOLAH_KELUAR");
+  const [jenisSurat, setJenisSurat] = useState(
+    "REKOMENDASI_PINDAH_SEKOLAH_KELUAR"
+  );
   const [kembalikanSuratVerfikasi, setKembalikanSuratVerifikasi] =
     useState(false);
   const [kembalikanSuratTTD, setKembalikanSuratTTD] = useState(false);
@@ -341,7 +343,8 @@ function Detail() {
                   <ViewSuratCard
                     label={"Surat Keterangan Lulus"}
                     pdfFile={`${
-                      targetData.surat_keterangan_lulus && targetData.surat_keterangan_lulus
+                      targetData.surat_keterangan_lulus &&
+                      targetData.surat_keterangan_lulus
                     }`}
                   />
                 )}
@@ -349,7 +352,8 @@ function Detail() {
                   <ViewSuratCard
                     label={"Surat Dinas Pendidikan Setempat"}
                     pdfFile={`${
-                      targetData.surat_dinas_pendidikan_setempat && targetData.surat_dinas_pendidikan_setempat
+                      targetData.surat_dinas_pendidikan_setempat &&
+                      targetData.surat_dinas_pendidikan_setempat
                     }`}
                   />
                 )}
@@ -357,7 +361,7 @@ function Detail() {
                   <>
                     <div className="ps-2">
                       <InputFormWithLabel
-                        label={"Nomor Surat Naskah"}
+                        label={"Nomor Surat Keluar"}
                         value={nomorNaskah}
                         onChange={onChangeNomorNaskah}
                         type={"text"}
@@ -389,8 +393,12 @@ function Detail() {
                     <div className="verifikasiPenandatangan">
                       <h4 className="ms-3">Pilih Penandatangan :</h4>
                       <Form.Select onChange={handleChange}>
-                        <option value={"kasubag"}>Ketua Sub Bagian </option>
-                        <option value={"sekretaris"}>Sekretaris DISDIK </option>
+                        <option value={"kasubag"}>
+                          Kasubbag Umum dan Kepegawaian{" "}
+                        </option>
+                        <option value={"sekretaris"}>
+                          Sekretaris Dinas Pendidikan
+                        </option>
                       </Form.Select>
                     </div>
                     {kembalikanSuratVerfikasi ? (
@@ -472,7 +480,7 @@ function Detail() {
                       jenis_kelamin: targetData.jenis_kelamin,
                       yang_menandatangani: targetData.yang_menandatangani,
                       nip: localStorage.getItem("nip"),
-                      nama_yang_menandatangani : localStorage.getItem("nama"),
+                      nama_yang_menandatangani: localStorage.getItem("nama"),
                       tempat_tanggal_lahir: targetData.tempat_tgl_lahir,
                       pekerjaan_ortu: targetData.pekerjaan_orang_tua,
                       alasan_pindah: targetData.alasan_pindah,
@@ -483,7 +491,7 @@ function Detail() {
                     }).toString(),
                   }}
                 >
-                  Tampilkan Borang
+                  Tampilkan Surat
                 </Link>
               </div>
               {targetData.surat_disdik && (
@@ -584,7 +592,7 @@ function Detail() {
                         <div className="formLaporanAction d-flex justify-content-end align-items-center flex-column my-4 gap-3 ">
                           <div>
                             <ButtonFormView
-                              isinfo
+                              isprimary={"true"}
                               onClick={() => handleMarkAsSended(id)}
                             >
                               Kirim
