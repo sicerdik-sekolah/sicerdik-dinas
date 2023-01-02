@@ -22,7 +22,9 @@ function BuatAkun() {
     nip: "",
     tempat: "",
     role: "",
-    nama : ""
+    nama: "",
+    alamatSurat: "",
+    emailSurat: "",
   });
   const [jabatan, setJabatan] = useState("");
   const handleChangeJenisAkun = (e) => {
@@ -36,9 +38,9 @@ function BuatAkun() {
     setJabatan(e.target.value);
   };
   const makeAccount = async () => {
-    if(jenisAkun === "disdik"){
+    if (jenisAkun === "disdik") {
       try {
-        const { email, password, nik, nip, tempat,nama } = form;
+        const { email, password, nik, nip, tempat, nama } = form;
         const payload = {
           email,
           nama,
@@ -55,14 +57,23 @@ function BuatAkun() {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         console.log(data);
       } catch (error) {
         console.log(error);
       }
-    }else if(jenisAkun === "sekolah"){
+    } else if (jenisAkun === "sekolah") {
       try {
-        const { email, password, nik, nip, tempat,nama } = form;
+        const {
+          email,
+          password,
+          nik,
+          nip,
+          tempat,
+          nama,
+          alamatSurat,
+          emailSurat,
+        } = form;
         const payload = {
           email,
           nama,
@@ -72,6 +83,8 @@ function BuatAkun() {
           nip,
           tempat: tempat.toUpperCase(),
           role: jabatan,
+          emailSurat,
+          alamatSurat,
         };
         console.log("payload signup >> ", payload);
         const data = await axios.post(`${apiPath}/cms/akun`, payload, {
@@ -79,7 +92,7 @@ function BuatAkun() {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         console.log(data);
       } catch (error) {
         console.log(error);
@@ -88,14 +101,21 @@ function BuatAkun() {
   };
   const handleCreateAkun = (e) => {
     const { email, password, nik, nip, tempat, nama } = form;
-    if(password.length < 8){
+    if (password.length < 8) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Password harus lebih dari 8 karakter",
       });
-    }
-    else if (email && password && nik && nip && tempat && jabatan && password.length >= 8) {
+    } else if (
+      email &&
+      password &&
+      nik &&
+      nip &&
+      tempat &&
+      jabatan &&
+      password.length >= 8
+    ) {
       e.preventDefault();
       Swal.fire({
         title: "Buatkan Akun ?",
@@ -109,8 +129,8 @@ function BuatAkun() {
           console.log("role >>> ", jabatan);
           makeAccount();
           Swal.fire("Akun Berhasil Dibuat!", "", "success");
-          // navigation("/manajemen-akun/users");
-          // window.location.reload();
+          navigation("/manajemen-akun/users");
+          window.location.reload();
         }
       });
     } else {
@@ -127,7 +147,6 @@ function BuatAkun() {
     }
   }, []);
 
-  
   return (
     <>
       <NavBarManajemenAkun />
@@ -142,6 +161,7 @@ function BuatAkun() {
               <div className="d-flex flex-column gap-2">
                 <label className="label-select-akun">Jenis Akun : </label>
                 <Form.Select onChange={handleChangeJenisAkun}>
+                  <option value={""}></option>
                   <option value={"disdik"}>DISDIK </option>
                   <option value={"sekolah"}>SEKOLAH</option>
                 </Form.Select>
@@ -208,17 +228,42 @@ function BuatAkun() {
                 }`}
                 isRequired
               />
+              {jenisAkun === "sekolah" && (
+                <>
+                  <InputFormWithLabel
+                    label={"Email Sekolah"}
+                    type={"text"}
+                    name={"emailSurat"}
+                    onChange={handleChangeForm}
+                    value={form.emailSurat}
+                    placeholder={`Masukkan email sekolah untuk dijadikan kop surat saat membuat naskah`}
+                    isRequired
+                  />
+                  <InputFormWithLabel
+                    label={"Alamat Sekolah"}
+                    type={"text"}
+                    name={"alamatSurat"}
+                    onChange={handleChangeForm}
+                    value={form.alamatSurat}
+                    placeholder={`Masukkan alamat sekolah untuk dijadikan kop surat saat membuat naskah`}
+                    isRequired
+                  />
+                </>
+              )}
+
               <div className="d-flex flex-column gap-3">
                 <label className="label-select-akun">Jabatan Akun : </label>
                 <Form.Select onChange={handleChangeJabatan}>
                   {jenisAkun === "disdik" ? (
                     <>
-                      <option value={"sekretaris"}>Sekretaris Disdik</option>
-                      <option value={"kasubag"}>Kasubag DISDIK</option>
-                      <option value={"staff"}>Staff DISDIK</option>
+                      <option value={""}></option>
+                      <option value={"sekretaris"}>Sekretaris DISDIK</option>
+                      <option value={"kasubag"}>Kasubbag DISDIK</option>
+                      <option value={"staff"}>Admin DISDIK</option>
                     </>
                   ) : (
                     <>
+                      <option value={""}></option>
                       <option value={"kepala_sekolah"}>Kepala Sekolah</option>
                       <option value={"staff_sekolah"}>Staff Sekolah</option>
                     </>
