@@ -9,6 +9,8 @@ import {
   resetError,
   updateNaskahVerifikasi,
   sendFileDisdik,
+  APIkembalikanSuratVerfikasi,
+  APIkembalikanSuratTTD
 } from "../store/reducers/dummyDataSlice";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar/NavBar";
@@ -29,6 +31,9 @@ function Detail() {
   const [jenisSurat, setJenisSurat] = useState(
     "REKOMENDASI_PINDAH_SEKOLAH_KELUAR"
   );
+  const [komentarKembalikanVerifikasi, setKomentarKembalikanVerifikasi] =
+    useState("");
+  const [komentarKembalikanTTD, setKomentarKembalikanTTD] = useState("");
   const [kembalikanSuratVerfikasi, setKembalikanSuratVerifikasi] =
     useState(false);
   const [kembalikanSuratTTD, setKembalikanSuratTTD] = useState(false);
@@ -225,7 +230,7 @@ function Detail() {
   };
 
   const handleKembalikanNaskahTTD = (e) => {
-    if (/*form.role*/ roleSementara === "Ketua Sub Bagian") {
+    if (/*form.role*/ roleSementara !== "staff") {
       Swal.fire({
         title: "Yakin ingin kembalikan naskah ?",
         // showDenyButton: true,
@@ -235,6 +240,7 @@ function Detail() {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          dispatch(APIkembalikanSuratTTD({id : id, data : komentarKembalikanTTD}))
           Swal.fire("Naskah Dikembalikan!", "", "success");
         }
         // else if (result.isDenied) {
@@ -250,7 +256,7 @@ function Detail() {
     }
   };
   const handleKembalikanNaskahVerifikasi = (e) => {
-    if (/*form.role*/ roleSementara === "Staff") {
+    if (/*form.role*/ roleSementara === "staff") {
       Swal.fire({
         title: "Yakin ingin kembalikan naskah ?",
         // showDenyButton: true,
@@ -260,7 +266,14 @@ function Detail() {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          dispatch(
+            APIkembalikanSuratVerfikasi({
+              id: id,
+              data: komentarKembalikanVerifikasi,
+            })
+          );
           Swal.fire("Naskah Dikembalikan!", "", "success");
+          navigation("/home");
         }
         // else if (result.isDenied) {
         //   Swal.fire("Changes are not saved", "", "info");
@@ -406,7 +419,13 @@ function Detail() {
                       </div>
                       {kembalikanSuratVerfikasi ? (
                         <div className="ps-2 mt-3">
-                          <InputFormWithLabel label={"Komentar "} />
+                          <InputFormWithLabel
+                            label={"Komentar "}
+                            value={komentarKembalikanVerifikasi}
+                            onChange={(e) =>
+                              setKomentarKembalikanVerifikasi(e.target.value)
+                            }
+                          />
                           <div className="d-flex gap-2 mt-2">
                             <ButtonFormView
                               isinfo
@@ -552,7 +571,13 @@ function Detail() {
                     </div>
                     {kembalikanSuratTTD ? (
                       <div className="ps-5 mt-3">
-                        <InputFormWithLabel label={"Komentar "} />
+                        <InputFormWithLabel
+                          label={"Komentar "}
+                          value={komentarKembalikanTTD}
+                          onChange={(e) =>
+                            setKomentarKembalikanTTD(e.target.value)
+                          }
+                        />
                         <div className="d-flex gap-2 mt-2">
                           <ButtonFormView
                             isinfo
@@ -652,14 +677,22 @@ function Detail() {
             <main className="main pt-5 pb-5 px-3" style={{ width: "83%" }}>
               <div className="container d-flex flex-column justify-content-center align-items-center bg-white border">
                 <p className="fw-bolder">DITOLAK DENGAN ALASAN</p>
-                <p >
-                  Ditolak dari DISDIK pada tahap 
+                <p>
+                  Ditolak dari DISDIK pada tahap
                   {targetData.komentar_ditolak_verifikasi &&
                     ` Verfikasi dengan alasan penolakan yaitu : `}
                   {targetData.komentar_ditolak_ttd &&
                     ` TTD oleh DISDIK dengan alasan penolakan yaitu : `}
-                  {targetData.komentar_ditolak_verifikasi && <p className="text-center text-danger fw-bold">{targetData.komentar_ditolak_verifikasi}</p>}
-                  {targetData.komentar_ditolak_ttd && <p className="text-center text-danger fw-bold">{targetData.komentar_ditolak_ttd}</p>}
+                  {targetData.komentar_ditolak_verifikasi && (
+                    <p className="text-center text-danger fw-bold">
+                      {targetData.komentar_ditolak_verifikasi}
+                    </p>
+                  )}
+                  {targetData.komentar_ditolak_ttd && (
+                    <p className="text-center text-danger fw-bold">
+                      {targetData.komentar_ditolak_ttd}
+                    </p>
+                  )}
                 </p>
               </div>
             </main>

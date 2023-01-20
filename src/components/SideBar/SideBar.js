@@ -54,6 +54,13 @@ function SideBar() {
           <p>Naskah Selesai</p>
         </Link>
       </div>
+      <div className={`${styles.text} `}>
+        <Link to={"/reports-rejected"}>
+          <img src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/null/external-reject-export-and-delivery-xnimrodx-lineal-xnimrodx.png" />
+          {/* <img src={iconSelesai} alt="" /> */}
+          <p>Naskah Ditolak</p>
+        </Link>
+      </div>
     </nav>
   );
 }

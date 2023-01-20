@@ -143,6 +143,55 @@ export const sendFileDisdik = createAsyncThunk(
   }
 );
 
+export const APIkembalikanSuratTTD = createAsyncThunk(
+  "/kembalikanSuratTTD",
+  async (payload) => {
+    try {
+      const token = Cookies.get("token");
+      console.log("payload >>> ", payload);
+      const res = await axios.put(
+        `${apiPath}/cms/laporan/balikan-naskahbermasalah-kestaff/${payload.id}`,
+        {
+          komentar_verifikasi: payload.data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("res >> ", res);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+export const APIkembalikanSuratVerfikasi = createAsyncThunk(
+  "/kembalikanSuratVerfikasi",
+  async (payload) => {
+    try {
+      const token = Cookies.get("token");
+      console.log("payload >>> ", payload);
+      const res = await axios.put(
+        `${apiPath}/cms/laporan/balikan-naskahbermasalah-kesekolah/${payload.id}`,
+        {
+          komentar_verifikasi: payload.data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("res >> ", res);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const dummyDataSlice = createSlice({
   name: "dummyData",
   initialState,

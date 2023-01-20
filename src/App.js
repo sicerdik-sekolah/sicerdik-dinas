@@ -20,6 +20,7 @@ import LaporanPerluVerifikasi from "./pages/LaporanPerluVerifikasi";
 import LaporanPerluRevisi from "./pages/LaporanPerluRevisi";
 import BuatAkun from "./pages/BuatAkun";
 import TampilanBorang from "./pages/TampilanBorang";
+import LaporanDitolak from "./pages/LaporanDitolak";
 
 function App() {
   const [instance, setInstance] = useState();
@@ -39,6 +40,7 @@ function App() {
           <Route path="/reports-send" element={<LaporanPerluDikirim />} />
           <Route path="/reports-revisi" element={<LaporanPerluRevisi />} />
           <Route path="/reports-done" element={<LaporanSelesai />} />
+          <Route path="/reports-rejected" element={<LaporanDitolak />} />
           <Route path="/login" element={<Login />} />
           <Route path="/manajemen-akun" element={<ManajemenAkunLogin />} />
           <Route path="/manajemen-akun/users" element={<Users />} />

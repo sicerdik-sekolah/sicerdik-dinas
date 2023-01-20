@@ -22,14 +22,14 @@ function Home() {
   const dataPerluVerifikasi = data
     ? data
         .filter((item) => {
-          return item.status_verifikasi == false;
+          return item.status_verifikasi == false && item.status_ditolak === false;
         })
         .map((item) => item)
     : [];
   const dataPerluDikirim = data
     ? data
         .filter((item) => {
-          return item.status_kirim == false;
+          return item.status_kirim == false && item.status_ditolak === false;
         })
         .map((item) => item)
     : [];
@@ -37,14 +37,14 @@ function Home() {
   const dataButuhTTD = data
     ? data
         .filter((item) => {
-          return item.status_ttd == false;
+          return item.status_ttd == false && item.status_ditolak === false;
         })
         .map((item) => item)
     : [];
   const dataVerifikasi = data
     ? data
         .filter((item) => {
-          return item.status_verifikasi == false;
+          return item.status_verifikasi == false && item.status_ditolak === false;
         })
         .map((item) => item)
     : [];
@@ -52,7 +52,14 @@ function Home() {
   const dataSelesai = data
     ? data
         .filter((item) => {
-          return item.status_kirim == true;
+          return item.status_kirim == true && item.status_ditolak === false;
+        })
+        .map((item) => item)
+    : [];
+  const dataDitolak = data
+    ? data
+        .filter((item) => {
+          return item.status_ditolak === true;
         })
         .map((item) => item)
     : [];
@@ -123,6 +130,12 @@ function Home() {
                   size={dataSelesai.length}
                   url={"/reports-done"}
                   label={"Total Naskah Selesai"}
+                />
+                <CardHomeLaporan
+                  img={"https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/null/external-reject-export-and-delivery-xnimrodx-lineal-xnimrodx.png"}
+                  size={dataDitolak.length}
+                  url={"/reports-rejected"}
+                  label={"Total Naskah Ditolak"}
                 />
               </>
             )}
