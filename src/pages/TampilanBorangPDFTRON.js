@@ -50,7 +50,7 @@ function TampilanBorang(props) {
   const bulanMasuk = dapatkanBulan(dateMasuk.getMonth() + 1);
   const tahunMasuk = dateMasuk.getFullYear();
   const datedisposisi = new Date(searchParams.get("tanggal_disposisi"));
-  console.log("dateDisposisi >> ", datedisposisi);
+  // console.log("dateDisposisi >> ", datedisposisi);
   const tanggaldisposisi = datedisposisi.getDate();
   const bulandisposisi = dapatkanBulan(datedisposisi.getMonth() + 1);
   const tahundisposisi = datedisposisi.getFullYear();
@@ -63,7 +63,7 @@ function TampilanBorang(props) {
 
   const [jenisSurat, setJenisSurat] = useState(searchParams.get("jenis_surat"));
 
-  console.log(jenisSurat);
+  // console.log(jenisSurat);
   const jsonData = {
     nama_siswa: searchParams.get("nama_siswa"),
     nomor_laporan: searchParams.get("nomor_laporan"),
@@ -85,10 +85,10 @@ function TampilanBorang(props) {
     tanggal_naskah_masuk: `${tanggalMasuk} ${bulanMasuk} ${tahunMasuk}`,
     tanggal_disposisi: `${tanggaldisposisi} ${bulandisposisi} ${tahundisposisi}`,
   };
-  console.log("searchparams >> ", searchParams.get("nama_siswa"));
-  console.log("props >> ", props);
+  // console.log("searchparams >> ", searchParams.get("nama_siswa"));
+  // console.log("props >> ", props);
 
-  console.log("query >> ", jsonData);
+  // console.log("query >> ", jsonData);
   useEffect(() => {
     WebViewer(
       { path: "lib", initialDoc: `/files/${jenisSurat}.doc` },

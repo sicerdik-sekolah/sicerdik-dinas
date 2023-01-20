@@ -31,7 +31,7 @@ function TampilanBorang(props) {
   const bulanMasuk = dapatkanBulan(dateMasuk.getMonth() + 1);
   const tahunMasuk = dateMasuk.getFullYear();
   const datedisposisi = new Date(searchParams.get("tanggal_disposisi"));
-  console.log("dateDisposisi >> ", datedisposisi);
+  // console.log("dateDisposisi >> ", datedisposisi);
   const tanggaldisposisi = datedisposisi.getDate();
   const bulandisposisi = dapatkanBulan(datedisposisi.getMonth() + 1);
   const tahundisposisi = datedisposisi.getFullYear();
@@ -48,7 +48,7 @@ function TampilanBorang(props) {
     content: () => printArea.current,
     documentTitle: "emp-data",
   });
-  console.log(jenisSurat);
+  // console.log(jenisSurat);
   const jsonData = {
     nama_siswa: searchParams.get("nama_siswa"),
     nomor_laporan: searchParams.get("nomor_laporan"),
@@ -67,14 +67,14 @@ function TampilanBorang(props) {
     yang_menandatangani: yang_menandatangani,
     nama_yang_menandatangani: namaPenandatangan,
     nip: searchParams.get("nip"),
-    tahun_lulus : searchParams.get("tahun_lulus"),
+    tahun_lulus: searchParams.get("tahun_lulus"),
     tanggal_naskah_masuk: `${tanggalMasuk} ${bulanMasuk} ${tahunMasuk}`,
     tanggal_disposisi: `${tanggaldisposisi} ${bulandisposisi} ${tahundisposisi}`,
   };
-  console.log("searchparams >> ", searchParams.get("nama_siswa"));
-  console.log("props >> ", props);
+  // console.log("searchparams >> ", searchParams.get("nama_siswa"));
+  // console.log("props >> ", props);
 
-  console.log("query >> ", jsonData);
+  // console.log("query >> ", jsonData);
 
   return (
     <div>

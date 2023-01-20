@@ -10,7 +10,7 @@ import {
   updateNaskahVerifikasi,
   sendFileDisdik,
   APIkembalikanSuratVerfikasi,
-  APIkembalikanSuratTTD
+  APIkembalikanSuratTTD,
 } from "../store/reducers/dummyDataSlice";
 import Footer from "../components/Footer/Footer";
 import NavBar from "../components/NavBar/NavBar";
@@ -50,19 +50,19 @@ function Detail() {
   );
   // const { form } = useSelector((state) => state.login);
   const targetData = allData.find((item) => item._id == id);
-  console.log("target data >> ", targetData);
+  // console.log("target data >> ", targetData);
   // const roleSementara = "Ketua Sub Bagian";
   const [roleSementara, setRoleSementara] = useState(authorizationCheck());
   const onChangeNomorNaskah = (e) => {
     setNomorNaskah(e.target.value);
-    console.log("nomor naskah >> ", nomorNaskah);
+    // console.log("nomor naskah >> ", nomorNaskah);
   };
   const onChangeTanggalDisposisi = (e) => {
-    console.log("tanggal_disposisi", e.target.value);
+    // console.log("tanggal_disposisi", e.target.value);
     setTanggalDisposisi(e.target.value);
   };
   const handleMarkAsVerified = (id) => {
-    console.log("role >>> ", roleSementara);
+    // console.log("role >>> ", roleSementara);
     if (/*form.role*/ roleSementara === "staff") {
       Swal.fire({
         title: "Verifikasi Naskah?",
@@ -106,8 +106,8 @@ function Detail() {
   };
 
   const handleMarkAsTTD = (id) => {
-    console.log("role >>> ", roleSementara);
-    console.log("file >> ", fileDisdik);
+    // console.log("role >>> ", roleSementara);
+    // console.log("file >> ", fileDisdik);
     if (
       /*form.role*/ roleSementara === "kasubag" ||
       /*form.role*/ roleSementara === "sekretaris"
@@ -240,10 +240,12 @@ function Detail() {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          dispatch(APIkembalikanSuratTTD({id : id, data : komentarKembalikanTTD}))
+          dispatch(
+            APIkembalikanSuratTTD({ id: id, data: komentarKembalikanTTD })
+          );
           Swal.fire("Naskah Dikembalikan!", "", "success");
-          navigation("/home")
-          window.location.reload()
+          navigation("/home");
+          window.location.reload();
         }
         // else if (result.isDenied) {
         //   Swal.fire("Changes are not saved", "", "info");
@@ -292,7 +294,7 @@ function Detail() {
 
   const handleChangeFileDisdik = (e) => {
     setFileDisdik(e.target.files[0]);
-    console.log("file >> ", fileDisdik);
+    // console.log("file >> ", fileDisdik);
   };
 
   useEffect(() => {
@@ -488,7 +490,7 @@ function Detail() {
                 `${apiFile}/${targetData.surat_ortu}`
               )} */}
                 <div className="mx-5 card p-2 borangBtn">
-                  {targetData && console.log("target data >> ", targetData)}
+                  {/* {targetData && console.log("target data >> ", targetData)} */}
                   <Link
                     to={{
                       pathname: `/tampilin`,

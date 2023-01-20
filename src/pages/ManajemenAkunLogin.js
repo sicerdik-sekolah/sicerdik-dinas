@@ -44,7 +44,7 @@ function Login() {
         text: "Mohon isi semua form",
       });
     }
-    console.log(formState);
+    // console.log(formState);
   };
 
   useEffect(() => {

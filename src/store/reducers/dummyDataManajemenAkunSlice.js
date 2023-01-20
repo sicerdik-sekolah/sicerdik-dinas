@@ -15,10 +15,13 @@ export const fetchAllUsers = createAsyncThunk(
     try {
       const token = Cookies.get("token");
 
-      const res = await axios.get(`${apiPath}/cms/akun/all-akun-dinas-dan-sekolah`, {
-        headers: { Authorization: "Bearer " + token },
-      });
-      console.log("RES >>", res.data.data);
+      const res = await axios.get(
+        `${apiPath}/cms/akun/all-akun-dinas-dan-sekolah`,
+        {
+          headers: { Authorization: "Bearer " + token },
+        }
+      );
+      // console.log("RES >>", res.data.data);
       return res.data.data;
     } catch (error) {
       console.log(error);
@@ -32,7 +35,7 @@ export const changeStatusAkun = createAsyncThunk(
     try {
       const token = Cookies.get("token");
 
-      console.log("id change >> ", id);
+      // console.log("id change >> ", id);
       const res = await axios({
         method: "put",
         url: `${apiPath}/cms/akun/ganti-status-akun/${id}`,
@@ -40,7 +43,7 @@ export const changeStatusAkun = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("RES change status>>", res);
+      // console.log("RES change status>>", res);
       return res;
     } catch (error) {
       console.log(error);
@@ -53,25 +56,24 @@ export const resetPassword = createAsyncThunk(
   async (payload) => {
     try {
       const token = Cookies.get("token");
-      console.log("payload insert ", payload);
+      // console.log("payload insert ", payload);
       const res = await axios({
-        method : "put",
+        method: "put",
         url: `${apiPath}/cms/akun/reset-password/${payload.id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        data : {
-          password : payload.password
-        }
-      })
+        data: {
+          password: payload.password,
+        },
+      });
 
-      console.log("res reset password >>", res)
-      return res
+      // console.log("res reset password >>", res)
+      return res;
     } catch (error) {
       console.log(error);
     }
   }
-
 );
 
 export const dummyDataManajemenAkunSlice = createSlice({
@@ -95,7 +97,7 @@ export const dummyDataManajemenAkunSlice = createSlice({
     },
     changeStatusTTD: (state, action) => {
       const id = Number(action.payload);
-      console.log(id);
+      // console.log(id);
       if (
         state.data.find((item) => item.id === id).status_verifikasi === "SUDAH"
       ) {
@@ -111,16 +113,15 @@ export const dummyDataManajemenAkunSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchAllUsers.fulfilled, (state, action) => {
-        console.log("payload >> ", action.payload);
+        // console.log("payload >> ", action.payload);
         state.data = action.payload;
       })
       .addCase(changeStatusAkun.fulfilled, (state, action) => {
-        console.log("action payload", action.payload);
+        // console.log("action payload", action.payload);
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
-        console.log("action payload reset password", action.payload);
-      })
-      ;
+        // console.log("action payload reset password", action.payload);
+      });
   },
 });
 

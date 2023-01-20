@@ -22,7 +22,9 @@ function Home() {
   const dataPerluVerifikasi = data
     ? data
         .filter((item) => {
-          return item.status_verifikasi == false && item.status_ditolak === false;
+          return (
+            item.status_verifikasi == false && item.status_ditolak === false
+          );
         })
         .map((item) => item)
     : [];
@@ -44,7 +46,9 @@ function Home() {
   const dataVerifikasi = data
     ? data
         .filter((item) => {
-          return item.status_verifikasi == false && item.status_ditolak === false;
+          return (
+            item.status_verifikasi == false && item.status_ditolak === false
+          );
         })
         .map((item) => item)
     : [];
@@ -63,20 +67,20 @@ function Home() {
         })
         .map((item) => item)
     : [];
-  
-    useEffect(() => {
-      if(!Cookies.get("token")){
-        navigation('/login')
-      }
-    }, [Cookies.get("token")])
+
+  useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigation("/login");
+    }
+  }, [Cookies.get("token")]);
 
   useEffect(() => {
     dispatch(fetchNaskah());
     setInterval(() => {
-      console.log("token", Cookies.get("token"))
-      if(!Cookies.get("token")){
-        navigation('/login')
-      }else{
+      // console.log("token", Cookies.get("token"))
+      if (!Cookies.get("token")) {
+        navigation("/login");
+      } else {
         dispatch(fetchNaskah());
       }
     }, 45000);
@@ -132,7 +136,9 @@ function Home() {
                   label={"Total Naskah Selesai"}
                 />
                 <CardHomeLaporan
-                  img={"https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/null/external-reject-export-and-delivery-xnimrodx-lineal-xnimrodx.png"}
+                  img={
+                    "https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/null/external-reject-export-and-delivery-xnimrodx-lineal-xnimrodx.png"
+                  }
                   size={dataDitolak.length}
                   url={"/reports-rejected"}
                   label={"Total Naskah Ditolak"}

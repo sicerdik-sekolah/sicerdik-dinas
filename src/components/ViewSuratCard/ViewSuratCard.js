@@ -46,7 +46,7 @@ function ViewSuratCard(props) {
                 file={{ url: `${apiFile}/${props.pdfFile}` }}
                 onLoadSuccess={onDocumentLoadSuccess}
               >
-                {console.log("props pdfFile >> ", props.pdfFile)}
+                {/* {console.log("props pdfFile >> ", props.pdfFile)} */}
                 <Page pageNumber={pageNumber} renderInteractiveForms={true} />
               </Document>
             ) : (
