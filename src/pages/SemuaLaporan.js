@@ -9,9 +9,17 @@ import { useDispatch } from "react-redux";
 import { fetchNaskah } from "../store/reducers/dummyDataSlice";
 function SemuaLaporan() {
   const dispatch = useDispatch();
+  const navigation = useNavigate()
+  const token = Cookies.get("token")
   useEffect(() => {
     dispatch(fetchNaskah());
   }, []);
+  useEffect(() => {
+    if(!token){
+      navigation("/login")
+      window.location.reload()
+    }
+  })
   return (
     <>
       <NavBar />

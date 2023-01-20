@@ -1,10 +1,7 @@
 import WebViewer from "@pdftron/webviewer";
 import NavBar from "../components/NavBar/NavBar";
 import Footer from "../components/Footer/Footer";
-import dapatkanBulan from "../utils/getMonth";
 import SideBar from "../components/SideBar/SideBar";
-import { useReactToPrint } from "react-to-print";
-
 import { useEffect, useRef } from "react";
 import {
   useParams,
@@ -15,11 +12,33 @@ import {
 
 import moment from "moment/moment";
 import { useState } from "react";
-import SuratPindahSekolahKeluar from "../components/TemplateBorang/SuratPindahSekolahKeluar/SuratPindahSekolahKeluar";
-import ButtonFormView from "../components/ButtonFormView/ButtonFormView";
-import SuratPindahRayonKeluar from "../components/TemplateBorang/SuratPindahRayonKeluar/SuratPindahRayonKeluar";
-import SuratPindahSekolahMasuk from "../components/TemplateBorang/SuratPindahSekolahMasuk/SuratPindahSekolahMasuk";
-import SuratPindahRayonMasuk from "../components/TemplateBorang/SuratPindahRayonMasuk/SuratPindahRayonMasuk";
+function dapatkanBulan(angka) {
+  if (angka == 1) {
+    return "Januari";
+  } else if (angka == 2) {
+    return "Februari";
+  } else if (angka == 3) {
+    return "Maret";
+  } else if (angka == 4) {
+    return "April";
+  } else if (angka == 5) {
+    return "Mei";
+  } else if (angka == 6) {
+    return "Juni";
+  } else if (angka == 7) {
+    return "Juli";
+  } else if (angka == 8) {
+    return "Agustus";
+  } else if (angka == 9) {
+    return "September";
+  } else if (angka == 10) {
+    return "Oktober";
+  } else if (angka == 11) {
+    return "November";
+  } else if (angka == 12) {
+    return "Desember";
+  }
+}
 
 function TampilanBorang(props) {
   const viewer = useRef(null);
@@ -43,11 +62,7 @@ function TampilanBorang(props) {
     .toUpperCase();
 
   const [jenisSurat, setJenisSurat] = useState(searchParams.get("jenis_surat"));
-  const printArea = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => printArea.current,
-    documentTitle: "emp-data",
-  });
+
   console.log(jenisSurat);
   const jsonData = {
     nama_siswa: searchParams.get("nama_siswa"),
@@ -67,7 +82,6 @@ function TampilanBorang(props) {
     yang_menandatangani: yang_menandatangani,
     nama_yang_menandatangani: namaPenandatangan,
     nip: searchParams.get("nip"),
-    tahun_lulus : searchParams.get("tahun_lulus"),
     tanggal_naskah_masuk: `${tanggalMasuk} ${bulanMasuk} ${tahunMasuk}`,
     tanggal_disposisi: `${tanggaldisposisi} ${bulandisposisi} ${tahundisposisi}`,
   };
@@ -75,6 +89,47 @@ function TampilanBorang(props) {
   console.log("props >> ", props);
 
   console.log("query >> ", jsonData);
+  useEffect(() => {
+    WebViewer(
+      { path: "lib", initialDoc: `/files/${jenisSurat}.doc` },
+      viewer.current
+    ).then((instance) => {
+      instance.UI.disableElements(["toolbarGroup-Shapes"]);
+      instance.UI.disableElements(["toolbarGroup-Edit"]);
+      instance.UI.disableElements(["toolbarGroup-Insert"]);
+      instance.UI.disableElements(["toolbarGroup-View"]);
+      instance.UI.disableElements(["toolbarGroup-Annotate"]);
+      instance.UI.disableElements(["toolbarGroup-Forms"]);
+      instance.UI.disableElements(["toolbarGroup-Button"]);
+      instance.UI.disableElements(["toolbarGroup-FillAndSign"]);
+      instance.UI.disableElements(["signatureToolGroupButton"]);
+      instance.UI.disableElements(["notesPanel"]);
+      instance.UI.disableElements(["viewControlsButton"]);
+      instance.UI.disableElements(["selectToolButton"]);
+      instance.UI.disableElements(["toggleNotesButton"]);
+      instance.UI.disableElements(["searchButton"]);
+      instance.UI.disableElements(["freeTextToolGroupButton"]);
+      instance.UI.disableElements(["crossStampToolButton"]);
+      instance.UI.disableElements(["checkStampToolButton"]);
+      instance.UI.disableElements(["rubberStampToolGroupButton"]);
+      instance.UI.disableElements(["dateFreeTextToolButton"]);
+      instance.UI.disableElements(["eraserToolButton"]);
+      instance.UI.disableElements(["panToolButton"]);
+      instance.UI.disableElements(["signatureToolGroupButton"]);
+      instance.UI.disableElements(["viewControlsOverlay"]);
+      instance.UI.disableElements(["ribbons"]);
+      instance.UI.disableElements(["tools"]);
+      instance.UI.disableElements(["headerItems"]);
+      instance.UI.disableElements(["toolsHeader"]);
+      const { documentViewer } = instance.Core;
+
+      documentViewer.addEventListener("documentLoaded", async () => {
+        await documentViewer.getDocument().documentCompletePromise();
+        documentViewer.updateView();
+        await documentViewer.getDocument().applyTemplateValues(jsonData);
+      });
+    });
+  }, []);
 
   return (
     <div>
@@ -101,32 +156,16 @@ function TampilanBorang(props) {
             </div>
             <h4 className="text-center">Tampilan Surat</h4>
           </div>
-          <div className="d-flex justify-content-center my-3">
-            <ButtonFormView onClick={handlePrint}>Cetak Surat</ButtonFormView>
-          </div>
           <div
             className="webviewer"
-            // ref={viewer}
+            ref={viewer}
             style={{
+              height: "100vh",
+
               justifyContent: "center",
               alignItems: "center",
             }}
-          >
-            <div ref={printArea} id="content" style={{ padding: "1rem 2rem" }}>
-              {jenisSurat === "REKOMENDASI_PINDAH_SEKOLAH_KELUAR" && (
-                <SuratPindahSekolahKeluar data={jsonData} />
-              )}
-              {jenisSurat === "REKOMENDASI_PINDAH_RAYON_KELUAR" && (
-                <SuratPindahRayonKeluar data={jsonData} />
-              )}
-              {jenisSurat === "REKOMENDASI_PINDAH_SEKOLAH_MASUK" && (
-                <SuratPindahSekolahMasuk data={jsonData} />
-              )}
-              {jenisSurat === "REKOMENDASI_PINDAH_RAYON_MASUK" && (
-                <SuratPindahRayonMasuk data={jsonData} />
-              )}
-            </div>
-          </div>
+          ></div>
         </main>
       </div>
     </div>

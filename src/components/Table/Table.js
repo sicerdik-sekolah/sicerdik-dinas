@@ -20,28 +20,28 @@ function TableComponent(props) {
   ];
   const { data } = useSelector((state) => state.dummyData);
 
-  const dataButuhTTD = data
+  const dataButuhTTD = data? [...data].reverse()
     .filter((item) => {
       return item.status_ttd === false;
     })
-    .map((item) => item);
+    .map((item) => item) : [];
 
-  const dataPerluDikirim = data
+  const dataPerluDikirim = data? [...data].reverse()
     .filter((item) => {
       return item.status_kirim === false;
     })
-    .map((item) => item);
+    .map((item) => item) : [];
 
-  const dataSelesai = data
+  const dataSelesai = data? [...data].reverse()
     .filter((item) => {
       return item.status_kirim === true;
     })
-    .map((item) => item);
-  const dataVerifikasi = data
+    .map((item) => item) : [];
+  const dataVerifikasi = data? [...data].reverse()
     .filter((item) => {
       return item.status_verifikasi === false;
     })
-    .map((item) => item);
+    .map((item) => item) : [];
   // console.log(dataSelesai);
   return (
     <Table responsive striped bordered>
@@ -51,7 +51,7 @@ function TableComponent(props) {
       {props.isNeedSend && <TableBody data={dataPerluDikirim} />}
       {props.isDone && <TableBody data={dataSelesai} />}
       {!props.isTTD && !props.isNeedSend && !props.isDone && !props.isVerifikasi && (
-        <TableBody data={data} />
+        <TableBody data={[...data].reverse()} />
       )}
       {/* {props.} */}
       {/* <TableBody data={data} /> */}

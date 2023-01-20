@@ -30,11 +30,19 @@ function TableBody(props) {
                   className="button-status px-2 py-1"
                   style={{
                     backgroundColor: `${
-                      item.status_verifikasi === false ? "#EDE300" : "#00BDAA"
+                      item.status_ditolak
+                        ? "#F55050"
+                        : item.status_verifikasi === false
+                        ? "#EDE300"
+                        : "#00BDAA"
                     }`,
                   }}
                 >
-                  {!item.status_verifikasi ? "BELUM" : "SUDAH"}
+                  {item.status_ditolak
+                    ? "DITOLAK"
+                    : !item.status_verifikasi
+                    ? "BELUM"
+                    : "SUDAH"}
                 </span>
               </td>
               <td>
@@ -42,11 +50,19 @@ function TableBody(props) {
                   className="button-status px-2 py-1"
                   style={{
                     backgroundColor: `${
-                      item.status_ttd === false ? "#EDE300" : "#00BDAA"
+                      item.status_ditolak
+                        ? "#F55050"
+                        : item.status_ttd === false
+                        ? "#EDE300"
+                        : "#00BDAA"
                     }`,
                   }}
                 >
-                  {!item.status_ttd ? "BELUM" : "SUDAH"}
+                  {item.status_ditolak
+                    ? "DITOLAK"
+                    : !item.status_ttd
+                    ? "BELUM"
+                    : "SUDAH"}
                 </span>
               </td>
               <td>
@@ -54,11 +70,19 @@ function TableBody(props) {
                   className="button-status px-2 py-1"
                   style={{
                     backgroundColor: `${
-                      item.status_kirim === false ? "#EDE300" : "#00BDAA"
+                      item.status_ditolak
+                        ? "#F55050"
+                        : item.status_kirim === false
+                        ? "#EDE300"
+                        : "#00BDAA"
                     }`,
                   }}
                 >
-                  {!item.status_kirim ? "BELUM" : "SUDAH"}
+                  {item.status_ditolak
+                    ? "DITOLAK"
+                    : !item.status_kirim
+                    ? "BELUM"
+                    : "SUDAH"}
                 </span>
               </td>
 

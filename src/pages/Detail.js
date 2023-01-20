@@ -317,197 +317,206 @@ function Detail() {
           >
             <SideBar />
           </div>
-          <main className="main pt-5 pb-5 px-3" style={{ width: "83%" }}>
-            <FormCard>
-              <div className="mx-4 mt-3 mb-4 formCardHead">
-                <h3 className="pb-3">Verifikasi Naskah id-{id}</h3>
-              </div>
-              <div className="mx-5 mt-3 mb-4">
-                <ViewSuratCard
-                  label={"Surat Permohonan Orangtua"}
-                  pdfFile={targetData.surat_ortu}
-                />
-                <ViewSuratCard
-                  label={"Surat Keterangan Pindah Sekolah"}
-                  pdfFile={targetData.surat_pindah}
-                />
-                {targetData.surat_lain_lain && (
+          {!targetData.status_ditolak && (
+            <main className="main pt-5 pb-5 px-3" style={{ width: "83%" }}>
+              <FormCard>
+                <div className="mx-4 mt-3 mb-4 formCardHead">
+                  <h3 className="pb-3">Verifikasi Naskah id-{id}</h3>
+                </div>
+                <div className="mx-5 mt-3 mb-4">
                   <ViewSuratCard
-                    label={"Surat Lain-Lain"}
-                    pdfFile={`${
-                      targetData.surat_lain_lain && targetData.surat_lain_lain
-                    }`}
+                    label={"Surat Permohonan Orangtua"}
+                    pdfFile={targetData.surat_ortu}
                   />
-                )}
-                {targetData.surat_keterangan_lulus && (
                   <ViewSuratCard
-                    label={"Surat Keterangan Lulus"}
-                    pdfFile={`${
-                      targetData.surat_keterangan_lulus &&
-                      targetData.surat_keterangan_lulus
-                    }`}
+                    label={"Surat Keterangan Pindah Sekolah"}
+                    pdfFile={targetData.surat_pindah}
                   />
-                )}
-                {targetData.surat_dinas_pendidikan_setempat && (
-                  <ViewSuratCard
-                    label={"Surat Dinas Pendidikan Setempat"}
-                    pdfFile={`${
-                      targetData.surat_dinas_pendidikan_setempat &&
-                      targetData.surat_dinas_pendidikan_setempat
-                    }`}
-                  />
-                )}
-                {targetData.status_verifikasi === false ? (
-                  <>
-                    <div className="ps-2">
-                      <InputFormWithLabel
-                        label={"Nomor Surat Keluar"}
-                        value={nomorNaskah}
-                        onChange={onChangeNomorNaskah}
-                        type={"text"}
-                      />
-                      <InputFormWithLabel
-                        label={"Tanggal Naskah Disposisi"}
-                        type={"date"}
-                        value={tanggalDisposisi}
-                        onChange={onChangeTanggalDisposisi}
-                      />
-                    </div>
-                    <div className="verifikasiPenandatangan">
-                      <h4 className="ms-3">Jenis Surat yang akan Dikirim :</h4>
-                      <Form.Select onChange={handleChangeJenisSurat}>
-                        <option value={"REKOMENDASI_PINDAH_SEKOLAH_KELUAR"}>
-                          Surat Pindah Sekolah Keluar{" "}
-                        </option>
-                        <option value={"REKOMENDASI_PINDAH_SEKOLAH_MASUK"}>
-                          Surat Pindah Sekolah Masuk{" "}
-                        </option>
-                        <option value={"REKOMENDASI_PINDAH_RAYON_KELUAR"}>
-                          Surat Pindah Rayon Keluar{" "}
-                        </option>
-                        <option value={"REKOMENDASI_PINDAH_RAYON_MASUK"}>
-                          Surat Pindah Rayon Masuk{" "}
-                        </option>
-                      </Form.Select>
-                    </div>
-                    <div className="verifikasiPenandatangan">
-                      <h4 className="ms-3">Pilih Penandatangan :</h4>
-                      <Form.Select onChange={handleChange}>
-                        <option value={"kasubag"}>
-                          Kasubbag Umum dan Kepegawaian{" "}
-                        </option>
-                        <option value={"sekretaris"}>
-                          Sekretaris Dinas Pendidikan
-                        </option>
-                      </Form.Select>
-                    </div>
-                    {kembalikanSuratVerfikasi ? (
-                      <div className="ps-2 mt-3">
-                        <InputFormWithLabel label={"Komentar "} />
-                        <div className="d-flex gap-2 mt-2">
+                  {targetData.surat_lain_lain && (
+                    <ViewSuratCard
+                      label={"Surat Lain-Lain"}
+                      pdfFile={`${
+                        targetData.surat_lain_lain && targetData.surat_lain_lain
+                      }`}
+                    />
+                  )}
+                  {targetData.surat_keterangan_lulus && (
+                    <ViewSuratCard
+                      label={"Surat Keterangan Lulus"}
+                      pdfFile={`${
+                        targetData.surat_keterangan_lulus &&
+                        targetData.surat_keterangan_lulus
+                      }`}
+                    />
+                  )}
+                  {targetData.surat_dinas_pendidikan_setempat && (
+                    <ViewSuratCard
+                      label={"Surat Dinas Pendidikan Setempat"}
+                      pdfFile={`${
+                        targetData.surat_dinas_pendidikan_setempat &&
+                        targetData.surat_dinas_pendidikan_setempat
+                      }`}
+                    />
+                  )}
+                  {targetData.status_verifikasi === false ? (
+                    <>
+                      <div className="ps-2">
+                        <InputFormWithLabel
+                          label={"Nomor Surat Keluar"}
+                          value={nomorNaskah}
+                          onChange={onChangeNomorNaskah}
+                          type={"text"}
+                        />
+                        <InputFormWithLabel
+                          label={"Tanggal Naskah Disposisi"}
+                          type={"date"}
+                          value={tanggalDisposisi}
+                          onChange={onChangeTanggalDisposisi}
+                        />
+                      </div>
+                      <div className="verifikasiPenandatangan">
+                        <h4 className="ms-3">
+                          Jenis Surat yang akan Dikirim :
+                        </h4>
+                        <Form.Select onChange={handleChangeJenisSurat}>
+                          <option value={"REKOMENDASI_PINDAH_SEKOLAH_KELUAR"}>
+                            Surat Pindah Sekolah Keluar{" "}
+                          </option>
+                          <option value={"REKOMENDASI_PINDAH_SEKOLAH_MASUK"}>
+                            Surat Pindah Sekolah Masuk{" "}
+                          </option>
+                          <option value={"REKOMENDASI_PINDAH_RAYON_KELUAR"}>
+                            Surat Pindah Rayon Keluar{" "}
+                          </option>
+                          <option value={"REKOMENDASI_PINDAH_RAYON_MASUK"}>
+                            Surat Pindah Rayon Masuk{" "}
+                          </option>
+                        </Form.Select>
+                      </div>
+                      <div className="verifikasiPenandatangan">
+                        <h4 className="ms-3">Pilih Penandatangan :</h4>
+                        <Form.Select onChange={handleChange}>
+                          <option value={"kasubag"}>
+                            Kasubbag Umum dan Kepegawaian{" "}
+                          </option>
+                          <option value={"sekretaris"}>
+                            Sekretaris Dinas Pendidikan
+                          </option>
+                        </Form.Select>
+                      </div>
+                      {kembalikanSuratVerfikasi ? (
+                        <div className="ps-2 mt-3">
+                          <InputFormWithLabel label={"Komentar "} />
+                          <div className="d-flex gap-2 mt-2">
+                            <ButtonFormView
+                              isinfo
+                              onClick={() =>
+                                setKembalikanSuratVerifikasi(false)
+                              }
+                            >
+                              Batalkan
+                            </ButtonFormView>
+                            <ButtonFormView
+                              onClick={handleKembalikanNaskahVerifikasi}
+                            >
+                              Kembalikan Naskah
+                            </ButtonFormView>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="formLaporanAction mt-3 ps-2">
                           <ButtonFormView
                             isinfo
-                            onClick={() => setKembalikanSuratVerifikasi(false)}
+                            onClick={() => setKembalikanSuratVerifikasi(true)}
                           >
-                            Batalkan
+                            Naskah Bermasalah
                           </ButtonFormView>
+                          <p>*Kembalikan Naskah Jika ada yang tidak valid</p>
+                        </div>
+                      )}
+
+                      <div className="formLaporanAction d-flex justify-content-end align-items-end flex-column my-4 gap-3 ">
+                        <div>
                           <ButtonFormView
-                            onClick={handleKembalikanNaskahVerifikasi}
+                            onClick={() => {
+                              handleMarkAsVerified(id);
+                            }}
                           >
-                            Kembalikan Naskah
+                            Verifikasi
                           </ButtonFormView>
                         </div>
+                        <p>*Verifikasi berkas dilakukan oleh Staff</p>
                       </div>
-                    ) : (
-                      <div className="formLaporanAction mt-3 ps-2">
-                        <ButtonFormView
-                          isinfo
-                          onClick={() => setKembalikanSuratVerifikasi(true)}
-                        >
-                          Naskah Bermasalah
-                        </ButtonFormView>
-                        <p>*Kembalikan Naskah Jika ada yang tidak valid</p>
-                      </div>
-                    )}
+                    </>
+                  ) : (
+                    <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
+                      SUDAH TERVERIFIKASI
+                    </p>
+                  )}
+                </div>
+              </FormCard>
 
-                    <div className="formLaporanAction d-flex justify-content-end align-items-end flex-column my-4 gap-3 ">
-                      <div>
-                        <ButtonFormView
-                          onClick={() => {
-                            handleMarkAsVerified(id);
-                          }}
-                        >
-                          Verifikasi
-                        </ButtonFormView>
-                      </div>
-                      <p>*Verifikasi berkas dilakukan oleh Staff</p>
-                    </div>
-                  </>
-                ) : (
-                  <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
-                    SUDAH TERVERIFIKASI
-                  </p>
-                )}
-              </div>
-            </FormCard>
-
-            <FormCard>
-              <div className="mx-4 mt-3 mb-4 formCardHead">
-                <h3 className="pb-3">Form Tanda Tangan Elektronik {"(TTE)"}</h3>
-              </div>
-              {/* {console.log(
+              <FormCard>
+                <div className="mx-4 mt-3 mb-4 formCardHead">
+                  <h3 className="pb-3">
+                    Form Tanda Tangan Elektronik {"(TTE)"}
+                  </h3>
+                </div>
+                {/* {console.log(
                 "surat ortu >> ,",
                 `${apiFile}/${targetData.surat_ortu}`
               )} */}
-              <div className="mx-5 card p-2 borangBtn">
-                {targetData && console.log("target data >> ", targetData)}
-                <Link
-                  to={{
-                    pathname: `/tampilin`,
-                    search: createSearchParams({
-                      jenis_surat: targetData.jenis_surat,
-                      nomor_laporan: targetData.nomor_laporan,
-                      nama_siswa: targetData.nama_siswa,
-                      asal_sekolah: targetData.asal_sekolah,
-                      tujuan_sekolah: targetData.tujuan_sekolah,
-                      nomor_naskah: targetData.nomor_naskah,
-                      tanggal_naskah_masuk: targetData.tanggal_naskah_masuk,
-                      tanggal_disposisi: targetData.tanggal_naskah_disposisi,
-                      nisn_siswa: targetData.nisn_siswa,
-                      nis_siswa: targetData.nis,
-                      kelas: targetData.tingkatDanKelas,
-                      nama_ortu: targetData.nama_orang_tua,
-                      jenis_kelamin: targetData.jenis_kelamin,
-                      yang_menandatangani: targetData.yang_menandatangani,
-                      nip: localStorage.getItem("nip"),
-                      nama_yang_menandatangani: localStorage.getItem("nama"),
-                      tempat_tanggal_lahir: targetData.tempat_tgl_lahir,
-                      pekerjaan_ortu: targetData.pekerjaan_orang_tua,
-                      alasan_pindah: targetData.alasan_pindah,
-                      jabatan: roleSementara,
-                      tahun_lulus: `${
-                        targetData.tahun_lulus ? targetData.tahun_lulus : "2022"
-                      }`,
-                    }).toString(),
-                  }}
-                >
-                  Tampilkan Surat
-                </Link>
-              </div>
-              {targetData.surat_disdik && (
-                <div className="mx-5 mt-3 mb-4">
-                  <ViewSuratCard
-                    label={"Surat Rekomendasi DISDIK"}
-                    pdfFile={targetData.surat_disdik}
-                  />
+                <div className="mx-5 card p-2 borangBtn">
+                  {targetData && console.log("target data >> ", targetData)}
+                  <Link
+                    to={{
+                      pathname: `/tampilin`,
+                      search: createSearchParams({
+                        jenis_surat: targetData.jenis_surat,
+                        nomor_laporan: targetData.nomor_laporan,
+                        nama_siswa: targetData.nama_siswa,
+                        asal_sekolah: targetData.asal_sekolah,
+                        tujuan_sekolah: targetData.tujuan_sekolah,
+                        nomor_naskah: targetData.nomor_naskah,
+                        tanggal_naskah_masuk: targetData.tanggal_naskah_masuk,
+                        tanggal_disposisi: targetData.tanggal_naskah_disposisi,
+                        nisn_siswa: targetData.nisn_siswa,
+                        nis_siswa: targetData.nis,
+                        kelas: targetData.tingkatDanKelas,
+                        nama_ortu: targetData.nama_orang_tua,
+                        jenis_kelamin: targetData.jenis_kelamin,
+                        yang_menandatangani: targetData.yang_menandatangani,
+                        nip: localStorage.getItem("nip"),
+                        nama_yang_menandatangani: localStorage.getItem("nama"),
+                        tempat_tanggal_lahir: targetData.tempat_tgl_lahir,
+                        pekerjaan_ortu: targetData.pekerjaan_orang_tua,
+                        alasan_pindah: targetData.alasan_pindah,
+                        jabatan: roleSementara,
+                        tahun_lulus: `${
+                          targetData.tahun_lulus
+                            ? targetData.tahun_lulus
+                            : "2022"
+                        }`,
+                      }).toString(),
+                    }}
+                  >
+                    Tampilkan Surat
+                  </Link>
                 </div>
-              )}
-              {targetData.status_ttd === false ||
-              targetData.status_kirim === false ? (
-                <>
-                  <div className="mx-5 mt-3 mb-4"></div>
-                  <div className="d-flex flex-row justify-content-between align-items-center mx-4 mt-3 mb-4 px-4 gap-5">
-                    {/* <div className=" flex-grow-1">
+                {targetData.surat_disdik && (
+                  <div className="mx-5 mt-3 mb-4">
+                    <ViewSuratCard
+                      label={"Surat Rekomendasi DISDIK"}
+                      pdfFile={targetData.surat_disdik}
+                    />
+                  </div>
+                )}
+                {targetData.status_ttd === false ||
+                targetData.status_kirim === false ? (
+                  <>
+                    <div className="mx-5 mt-3 mb-4"></div>
+                    <div className="d-flex flex-row justify-content-between align-items-center mx-4 mt-3 mb-4 px-4 gap-5">
+                      {/* <div className=" flex-grow-1">
                     <InputFormWithLabel
                       label={"Nomor Induk Pegawai"}
                       type={"number"}
@@ -529,115 +538,132 @@ function Detail() {
                     />
                   </div> */}
 
-                    {!targetData.status_kirim && (
-                      <div>
-                        <p>Upload Surat Rekomendasi</p>
-                        <input
-                          type="file"
-                          name={"filedisdik"}
-                          // value={fileDisdik}
-                          onChange={handleChangeFileDisdik}
-                        />
+                      {!targetData.status_kirim && (
+                        <div>
+                          <p>Upload Surat Rekomendasi</p>
+                          <input
+                            type="file"
+                            name={"filedisdik"}
+                            // value={fileDisdik}
+                            onChange={handleChangeFileDisdik}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    {kembalikanSuratTTD ? (
+                      <div className="ps-5 mt-3">
+                        <InputFormWithLabel label={"Komentar "} />
+                        <div className="d-flex gap-2 mt-2">
+                          <ButtonFormView
+                            isinfo
+                            onClick={() => setKembalikanSuratTTD(false)}
+                          >
+                            Batalkan
+                          </ButtonFormView>
+                          <ButtonFormView onClick={handleKembalikanNaskahTTD}>
+                            Kembalikan Naskah
+                          </ButtonFormView>
+                        </div>
                       </div>
-                    )}
-                  </div>
-                  {kembalikanSuratTTD ? (
-                    <div className="ps-5 mt-3">
-                      <InputFormWithLabel label={"Komentar "} />
-                      <div className="d-flex gap-2 mt-2">
+                    ) : (
+                      <div className="formLaporanAction mt-3 ps-5">
                         <ButtonFormView
                           isinfo
-                          onClick={() => setKembalikanSuratTTD(false)}
+                          onClick={() => setKembalikanSuratTTD(true)}
                         >
-                          Batalkan
+                          Naskah Bermasalah
                         </ButtonFormView>
-                        <ButtonFormView onClick={handleKembalikanNaskahTTD}>
-                          Kembalikan Naskah
-                        </ButtonFormView>
+                        <p>*Kembalikan Naskah Jika ada yang tidak valid</p>
+                      </div>
+                    )}
+                    <div className="mx-5 mt-3 mb-4">
+                      <div className="d-flex flex-row align-items-center justify-content-between">
+                        {targetData.status_ttd === false ? (
+                          <div className="formLaporanAction d-flex justify-content-end align-items-center flex-column my-4 gap-3 ">
+                            <div>
+                              <ButtonFormView
+                                onClick={() => handleMarkAsTTD(id)}
+                                isprimary={"true"}
+                              >
+                                {/* Proses TTE */}
+                                Tandai telah di Tandatangani
+                              </ButtonFormView>
+                            </div>
+                            <p>
+                              *Pastikan anda adalah orang yang harus
+                              menandatangani
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="text-center">Sudah Di TTD </p>
+                        )}
+                        {targetData.status_kirim === false ? (
+                          <div className="formLaporanAction d-flex justify-content-end align-items-center flex-column my-4 gap-3 ">
+                            <div>
+                              <ButtonFormView
+                                isprimary={"true"}
+                                onClick={() => handleMarkAsSended(id)}
+                              >
+                                Kirim
+                              </ButtonFormView>
+                            </div>
+                            <p>
+                              *Pengiriman surat dilakukan oleh Kasubag atau
+                              Sekretaris DISDIK
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
+                            SUDAH DIKIRIM
+                          </p>
+                        )}
                       </div>
                     </div>
-                  ) : (
-                    <div className="formLaporanAction mt-3 ps-5">
-                      <ButtonFormView
-                        isinfo
-                        onClick={() => setKembalikanSuratTTD(true)}
-                      >
-                        Naskah Bermasalah
-                      </ButtonFormView>
-                      <p>*Kembalikan Naskah Jika ada yang tidak valid</p>
-                    </div>
-                  )}
-                  <div className="mx-5 mt-3 mb-4">
-                    <div className="d-flex flex-row align-items-center justify-content-between">
-                      {targetData.status_ttd === false ? (
-                        <div className="formLaporanAction d-flex justify-content-end align-items-center flex-column my-4 gap-3 ">
-                          <div>
-                            <ButtonFormView
-                              onClick={() => handleMarkAsTTD(id)}
-                              isprimary={"true"}
-                            >
-                              {/* Proses TTE */}
-                              Tandai telah di Tandatangani
-                            </ButtonFormView>
-                          </div>
-                          <p>
-                            *Pastikan anda adalah orang yang harus
-                            menandatangani
-                          </p>
-                        </div>
-                      ) : (
-                        <p className="text-center">Sudah Di TTD </p>
-                      )}
-                      {targetData.status_kirim === false ? (
-                        <div className="formLaporanAction d-flex justify-content-end align-items-center flex-column my-4 gap-3 ">
-                          <div>
-                            <ButtonFormView
-                              isprimary={"true"}
-                              onClick={() => handleMarkAsSended(id)}
-                            >
-                              Kirim
-                            </ButtonFormView>
-                          </div>
-                          <p>
-                            *Pengiriman surat dilakukan oleh Kasubag atau
-                            Sekretaris DISDIK
-                          </p>
-                        </div>
-                      ) : (
-                        <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
-                          SUDAH DIKIRIM
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
-                  SUDAH DI TANDATANGANI DAN DI KIRIM
-                </p>
-              )}
-            </FormCard>
+                  </>
+                ) : (
+                  <p className="d-flex justify-content-center align-items-center text-status-form mt-5 mb-0">
+                    SUDAH DI TANDATANGANI DAN DI KIRIM
+                  </p>
+                )}
+              </FormCard>
 
-            <FormCard>
-              <div className="mx-4 mt-3 mb-4 formCardHead">
-                <h3 className="pb-3">Status Laporan</h3>
+              <FormCard>
+                <div className="mx-4 mt-3 mb-4 formCardHead">
+                  <h3 className="pb-3">Status Laporan</h3>
+                </div>
+                <div className="mx-5 mt-3 mb-4">
+                  <ViewStatusCard
+                    label={"Status Verifikasi"}
+                    status={targetData.status_verifikasi ? "SUDAH" : "BELUM"}
+                  />
+                  <ViewStatusCard
+                    label={"Status Tanda Tangan (TTD)"}
+                    status={targetData.status_ttd ? "SUDAH" : "BELUM"}
+                  />
+                  <ViewStatusCard
+                    label={"Status Kirim"}
+                    status={targetData.status_kirim ? "SUDAH" : "BELUM"}
+                  />
+                </div>
+              </FormCard>
+            </main>
+          )}
+          {targetData.status_ditolak && (
+            <main className="main pt-5 pb-5 px-3" style={{ width: "83%" }}>
+              <div className="container d-flex flex-column justify-content-center align-items-center bg-white border">
+                <p className="fw-bolder">DITOLAK DENGAN ALASAN</p>
+                <p >
+                  Ditolak dari DISDIK pada tahap 
+                  {targetData.komentar_ditolak_verifikasi &&
+                    ` Verfikasi dengan alasan penolakan yaitu : `}
+                  {targetData.komentar_ditolak_ttd &&
+                    ` TTD oleh DISDIK dengan alasan penolakan yaitu : `}
+                  {targetData.komentar_ditolak_verifikasi && <p className="text-center text-danger fw-bold">{targetData.komentar_ditolak_verifikasi}</p>}
+                  {targetData.komentar_ditolak_ttd && <p className="text-center text-danger fw-bold">{targetData.komentar_ditolak_ttd}</p>}
+                </p>
               </div>
-              <div className="mx-5 mt-3 mb-4">
-                <ViewStatusCard
-                  label={"Status Verifikasi"}
-                  status={targetData.status_verifikasi ? "SUDAH" : "BELUM"}
-                />
-                <ViewStatusCard
-                  label={"Status Tanda Tangan (TTD)"}
-                  status={targetData.status_ttd ? "SUDAH" : "BELUM"}
-                />
-                <ViewStatusCard
-                  label={"Status Kirim"}
-                  status={targetData.status_kirim ? "SUDAH" : "BELUM"}
-                />
-              </div>
-            </FormCard>
-          </main>
+            </main>
+          )}
         </div>
       ) : (
         navigation("/home")
