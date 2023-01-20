@@ -242,6 +242,8 @@ function Detail() {
         if (result.isConfirmed) {
           dispatch(APIkembalikanSuratTTD({id : id, data : komentarKembalikanTTD}))
           Swal.fire("Naskah Dikembalikan!", "", "success");
+          navigation("/home")
+          window.location.reload()
         }
         // else if (result.isDenied) {
         //   Swal.fire("Changes are not saved", "", "info");
