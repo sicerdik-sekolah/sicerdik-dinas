@@ -1,5 +1,14 @@
-const apiPath = "http://localhost:9000/api/v1";
-const apiUploadPath = "http://localhost:9000/api/v1/uploads";
+// const apiPath = "http://localhost:9000/api/v1";
+// const apiPath = "https://apiserver.sicerdik.web.id/api/v1";
+const apiPath = "http://apiserver.sicerdik.web.id/api/v1";
+// const apiPath = "https://apisicerdik.sicerdik.web.id/api/v1";
+// const apiUploadPath = "http://localhost:9000/api/v1/uploads";
+// const apiUploadPath = "https://apiserver.sicerdik.web.id/api/v1/uploads";
+const apiUploadPath = "http://apiserver.sicerdik.web.id/api/v1/uploads";
+// const apiUploadPath = "https://apisicerdik.sicerdik.web.id/api/v1/uploads";
 const key = "secretanykey27123";
-const apiFile = "http://localhost:9000/uploads";
+// const apiFile = "http://localhost:9000/uploads";
+// const apiFile = "https://apiserver.sicerdik.web.id/uploads";
+const apiFile = "http://apiserver.sicerdik.web.id/uploads";
+// const apiFile = "https://apisicerdik.sicerdik.web.id/uploads";
 export { apiPath, apiUploadPath, key, apiFile };
