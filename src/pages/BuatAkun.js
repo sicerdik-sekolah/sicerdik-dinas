@@ -130,7 +130,7 @@ function BuatAkun() {
           makeAccount();
           Swal.fire("Akun Berhasil Dibuat!", "", "success");
           navigation("/manajemen-akun/users");
-          window.location.reload();
+          // window.location.reload();
         }
       });
     } else {

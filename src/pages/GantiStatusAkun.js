@@ -21,7 +21,7 @@ function GantiStatusAkun(props) {
   const changeStatus = () => {
     dispatch(changeStatusAkun(id));
     navigation("/manajemen-akun/users");
-    window.location.reload();
+    // window.location.reload();
   };
   return (
     <>

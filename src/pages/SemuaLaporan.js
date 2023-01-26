@@ -17,7 +17,7 @@ function SemuaLaporan() {
   useEffect(() => {
     if(!token){
       navigation("/login")
-      window.location.reload()
+      // window.location.reload()
     }
   })
   return (

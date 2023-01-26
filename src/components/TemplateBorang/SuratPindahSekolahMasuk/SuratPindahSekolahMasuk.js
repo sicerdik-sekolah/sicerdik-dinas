@@ -25,7 +25,7 @@ function SuratPindahSekolahMasuk(props) {
 
       <div className="titleBorang text-center d-flex flex-column justify-content-center align-items-center">
         <p className="title text-center mt-2">REKOMENDASI</p>
-        <p>Nomor : 422/ {props.data.nomor_laporan} / 5.3.01 / 2023</p>
+        <p>Nomor : 422/ {props.data.nomor_naskah} / 5.3.01 / 2023</p>
         <p>TENTANG</p>
         <p>PINDAH SEKOLAH</p>
       </div>

@@ -245,7 +245,7 @@ function Detail() {
           );
           Swal.fire("Naskah Dikembalikan!", "", "success");
           navigation("/home");
-          window.location.reload();
+          // window.location.reload();
         }
         // else if (result.isDenied) {
         //   Swal.fire("Changes are not saved", "", "info");
@@ -342,6 +342,7 @@ function Detail() {
                 </div>
                 <div className="mx-5 mt-3 mb-4">
                   <ViewSuratCard
+                    id={id}
                     label={"Surat Permohonan Orangtua"}
                     pdfFile={targetData.surat_ortu}
                   />
