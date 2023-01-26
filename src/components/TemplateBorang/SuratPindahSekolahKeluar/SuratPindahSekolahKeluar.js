@@ -33,7 +33,7 @@ function SuratPindahSekolahKeluar(props) {
         <p className="mt-2">
           &emsp;&emsp;&emsp;&emsp;Menindaklanjuti Surat Keterangan Pindah
           Sekolah dari {props.data.asal_sekolah} nomor :{" "}
-          {props.data.nomor_laporan}, tanggal {props.data.tanggal_naskah_masuk},
+          422 / {props.data.nomor_laporan} / 2023, tanggal {props.data.tanggal_naskah_masuk},
           maka dengan ini Kepala Dinas Pendidikan Kota Tanjungpinang memberikan
           rekomendasi kepada :
         </p>
