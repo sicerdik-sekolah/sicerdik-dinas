@@ -24,18 +24,16 @@ function SuratPindahRayonKeluar(props) {
       </div>
 
       <div className="titleBorang text-center d-flex flex-column justify-content-center align-items-center">
-        <p className="title text-center mt-2">
-          SURAT REKOMENDASI PINDAH RAYON
-        </p>
+        <p className="title text-center mt-2">SURAT REKOMENDASI PINDAH RAYON</p>
         <p>Nomor : 422/ {props.data.nomor_naskah} / 5.3.01 / 2023</p>
       </div>
       <div className="content d-flex flex-column justify-content-start align-items-center mx-5">
         <p className="mt-2">
           &emsp;&emsp;&emsp;&emsp;Menindaklanjuti Surat Keterangan Pindah
-          Sekolah dari {props.data.asal_sekolah} nomor :{" "}
-          422 / {props.data.nomor_laporan} / 2023, tanggal {props.data.tanggal_naskah_masuk},
-          maka dengan ini Kepala Dinas Pendidikan Kota Tanjungpinang memberikan
-          rekomendasi kepada :
+          Sekolah dari {props.data.asal_sekolah} nomor : 422 /{" "}
+          {props.data.nomor_laporan} / 2023, tanggal{" "}
+          {props.data.tanggal_naskah_masuk}, maka dengan ini Kepala Dinas
+          Pendidikan Kota Tanjungpinang memberikan rekomendasi kepada :
         </p>
         <div className="contentData align-self-start w-100">
           <div className="">
@@ -115,8 +113,8 @@ function SuratPindahRayonKeluar(props) {
       </div>
       <div className="content d-flex flex-column justify-content-start mt-3  mx-5">
         <p style={{ textAlign: "justify" }}>
-          &emsp;&emsp;&emsp;&emsp;Demikian Surat Rekomendasi Pindah Rayon
-          dibuat untuk dapat dipergunakan sebagaimana mestinya.
+          &emsp;&emsp;&emsp;&emsp;Demikian Surat Rekomendasi Pindah Rayon dibuat
+          untuk dapat dipergunakan sebagaimana mestinya.
         </p>
       </div>
       <div className="d-flex mt-2 justify-content-end">
@@ -124,9 +122,13 @@ function SuratPindahRayonKeluar(props) {
           <p>Tanjungpinang , {props.data.tanggal_disposisi}</p>
           <p>a.n KEPALA DINAS PENDIDIKAN</p>
           <p>KOTA TANJUNGPINANG</p>
-          <p>SEKRETARIS</p>
-          <p>u.b.</p>
-          <p>KASUBBAG UMUM DAN KEPEGAWAIAN</p>
+          <p>
+            {props.data.yang_menandatangani === "KASUBAG"
+              ? "KASUBBAG UMUM DAN KEPEGAWAIAN"
+              : "SEKRETARIS"}
+          </p>
+          <br />
+          <br />
           <br />
           <br />
           <br />

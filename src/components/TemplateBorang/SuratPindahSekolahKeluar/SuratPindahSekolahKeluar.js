@@ -32,10 +32,10 @@ function SuratPindahSekolahKeluar(props) {
       <div className="content d-flex flex-column justify-content-start align-items-center mx-5">
         <p className="mt-2">
           &emsp;&emsp;&emsp;&emsp;Menindaklanjuti Surat Keterangan Pindah
-          Sekolah dari {props.data.asal_sekolah} nomor :{" "}
-          422 / {props.data.nomor_laporan} / 2023, tanggal {props.data.tanggal_naskah_masuk},
-          maka dengan ini Kepala Dinas Pendidikan Kota Tanjungpinang memberikan
-          rekomendasi kepada :
+          Sekolah dari {props.data.asal_sekolah} nomor : 422 /{" "}
+          {props.data.nomor_laporan} / 2023, tanggal{" "}
+          {props.data.tanggal_naskah_masuk}, maka dengan ini Kepala Dinas
+          Pendidikan Kota Tanjungpinang memberikan rekomendasi kepada :
         </p>
         <div className="contentData align-self-start w-100">
           <div className="">
@@ -118,9 +118,13 @@ function SuratPindahSekolahKeluar(props) {
           <p>Tanjungpinang , {props.data.tanggal_disposisi}</p>
           <p>a.n KEPALA DINAS PENDIDIKAN</p>
           <p>KOTA TANJUNGPINANG</p>
-          <p>SEKRETARIS</p>
-          <p>u.b.</p>
-          <p>KASUBBAG UMUM DAN KEPEGAWAIAN</p>
+          <p>
+            {props.data.yang_menandatangani === "KASUBAG"
+              ? "KASUBBAG UMUM DAN KEPEGAWAIAN"
+              : "SEKRETARIS"}
+          </p>
+          <br />
+          <br />
           <br />
           <br />
           <br />

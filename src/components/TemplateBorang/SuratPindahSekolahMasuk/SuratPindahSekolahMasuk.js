@@ -114,9 +114,13 @@ function SuratPindahSekolahMasuk(props) {
           <p>Tanjungpinang , {props.data.tanggal_disposisi}</p>
           <p>a.n KEPALA DINAS PENDIDIKAN</p>
           <p>KOTA TANJUNGPINANG</p>
-          <p>SEKRETARIS</p>
-          <p>u.b.</p>
-          <p>KASUBBAG UMUM DAN KEPEGAWAIAN</p>
+          <p>
+            {props.data.yang_menandatangani === "KASUBAG"
+              ? "KASUBBAG UMUM DAN KEPEGAWAIAN"
+              : "SEKRETARIS"}
+          </p>
+          <br />
+          <br />
           <br />
           <br />
           <br />
